@@ -4,6 +4,12 @@
  */
 package gui;
 
+
+import dbConnection.DatabaseConnection;
+import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.*;
+
 /**
  *
  * @author Clarence
@@ -167,20 +173,82 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void checkLogin(String username, String password) {
+        // Get the database connection from the DatabaseConnection class
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+
+        if (conn != null) {
+            String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
+            try {
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    // Retrieve role from the database
+                    String role = rs.getString("role");
+
+                    // Check if the user is an Admin or Salesperson
+                    if ("Admin".equalsIgnoreCase(role)) {
+                        new MainAdmin().setVisible(true);  // Navigate to Admin frame
+                    } else if ("Salesperson".equalsIgnoreCase(role)) {
+                        new MainUser().setVisible(true);   // Navigate to Salesperson frame
+                    }
+                    this.dispose();  // Close the Login frame
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid username or password.");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage());
+            }
+        }
+    }
+
     private void usernametxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernametxtActionPerformed
         // TODO add your handling code here:
+        String username = usernametxt.getText();
+        if (username.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Username cannot be empty!");
+        }
     }//GEN-LAST:event_usernametxtActionPerformed
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
         // TODO add your handling code here:
+        String username = usernametxt.getText();  // Get entered username
+        String password = new String(passwordtxt.getPassword());  // Get entered password
+
+        
+       // checkLogin(username, password);
+        
+        // Basic validation to check if fields are empty
+    if (username.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter both username and password!");
+    } else {
+        // Call the checkLogin method to verify credentials
+        checkLogin(username, password);
+    }
+
     }//GEN-LAST:event_loginbtnActionPerformed
 
     private void passwordtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordtxtActionPerformed
         // TODO add your handling code here:
+        String password = new String(passwordtxt.getPassword());
+         if (password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Password cannot be empty!");
+        }
     }//GEN-LAST:event_passwordtxtActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
+        // Action for checkbox, for example, show/hide password when checkbox is checked
+    if (jCheckBox1.isSelected()) {
+        // Show the password by changing the echoChar
+        passwordtxt.setEchoChar((char) 0);  // Show the password in plain text
+    } else {
+        // Hide the password by setting the echoChar
+        passwordtxt.setEchoChar('*');  // Hide the password with asterisks
+    }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**

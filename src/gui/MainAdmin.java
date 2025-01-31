@@ -82,6 +82,11 @@ public class MainAdmin extends javax.swing.JFrame {
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -432,6 +437,35 @@ public class MainAdmin extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(1); // Palitan ng tamang index ng "WAREHOUSE" tab
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        // Get the selected index of the tab
+    int selectedIndex = jTabbedPane1.getSelectedIndex();
+
+    // Check if the "Logout" tab (index 5) is selected
+    if (selectedIndex == 5) {
+        // Call the logout function to go back to Login frame
+        logout();
+    }
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void logout() {
+        // Hide the current frame (MainAdmin or MainUser)
+        this.setVisible(false);
+
+        // Show the Login frame (assuming Login.java is your login frame class)
+        Login loginFrame = new Login(); // Create a new instance of Login frame
+        loginFrame.setVisible(true);
+
+        // Optionally, add a WindowListener to exit the app when Login window is closed
+        loginFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.exit(0); // Exit the application when Login window is closed
+            }
+        });
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
