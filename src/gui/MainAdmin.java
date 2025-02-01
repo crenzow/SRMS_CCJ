@@ -540,6 +540,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 categoryTXT.setText(rs.getString("category"));
                 priceTXT.setText(rs.getString("price"));
                 stocksTXT.setText(rs.getString("stockQuantity"));
+                searchTXT.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "Product Not Found!");
             }
@@ -586,6 +587,9 @@ public class MainAdmin extends javax.swing.JFrame {
 
             if (rowsUpdated > 0) {
                 JOptionPane.showMessageDialog(null, "Product Updated Successfully!");
+
+                // Refresh the table after updating
+                loadProductsTable();
             } else {
                 JOptionPane.showMessageDialog(null, "Update Failed. Please check Product ID.");
             }
@@ -637,6 +641,9 @@ public class MainAdmin extends javax.swing.JFrame {
                 categoryTXT.setText("");
                 priceTXT.setText("");
                 stocksTXT.setText("");
+
+                // Refresh the table after adding
+                loadProductsTable(); 
             } else {
                 JOptionPane.showMessageDialog(null, "Failed to Add Product!");
             }
@@ -650,45 +657,50 @@ public class MainAdmin extends javax.swing.JFrame {
 
     private void deleteproductBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteproductBTNActionPerformed
         Connection conn = DatabaseConnection.getInstance().getConnection();
-        String productID = productidTXT.getText().trim();
+    String productID = productidTXT.getText().trim();
 
-        // Check if productID is empty
-        if (productID.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Enter Product ID to Delete!");
-            return;
+    // Check if productID is empty
+    if (productID.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Enter Product ID to Delete!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Confirmation dialog
+    int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this product?", 
+                                                "Confirm Delete", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) {
+        return; // If user selects NO, exit the method
+    }
+
+    try {
+        String sql = "DELETE FROM products WHERE productID = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, productID);
+
+        int rowsDeleted = ps.executeUpdate(); // Execute delete query
+
+        if (rowsDeleted > 0) {
+            JOptionPane.showMessageDialog(null, "Product Deleted Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            // Clear text fields after deleting
+            searchTXT.setText("");
+            productidTXT.setText("");
+            productnameTXT.setText("");
+            categoryTXT.setText("");
+            priceTXT.setText("");
+            stocksTXT.setText("");
+
+            // Refresh the table after deletion
+            loadProductsTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Product Not Found!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
 
-        // Confirmation dialog
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this product?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) {
-            return; // If user selects NO, exit the method
-        }
-
-        try {
-            String sql = "DELETE FROM products WHERE productID = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, productID);
-
-            int rowsDeleted = ps.executeUpdate(); // Execute delete query
-
-            if (rowsDeleted > 0) {
-                JOptionPane.showMessageDialog(null, "Product Deleted Successfully!");
-
-                // Clear text fields after deleting
-                productidTXT.setText("");
-                productnameTXT.setText("");
-                categoryTXT.setText("");
-                priceTXT.setText("");
-                stocksTXT.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Product Not Found!");
-            }
-
-            ps.close(); // Close statement
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error Deleting Data!");
-            e.printStackTrace();
-        }
+        ps.close(); // Close statement
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error Deleting Data!", "Database Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_deleteproductBTNActionPerformed
 
     private void filterCMBBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCMBBXActionPerformed
@@ -1030,28 +1042,37 @@ public class MainAdmin extends javax.swing.JFrame {
         // Clear existing table data
         model.setRowCount(0);
 
-        String sql = "";
+        String sql = "SELECT * FROM products"; // Default query
+
         switch (sortOption) {
             case "Lowest to Highest Price":
-                sql = "SELECT * FROM products ORDER BY price ASC";
+                sql += " ORDER BY price ASC";
                 break;
             case "Highest to Lowest Price":
-                sql = "SELECT * FROM products ORDER BY price DESC";
+                sql += " ORDER BY price DESC";
                 break;
             case "Lowest to Highest Stocks":
-                sql = "SELECT * FROM products ORDER BY stockQuantity ASC";
+                sql += " ORDER BY stockQuantity ASC";
                 break;
             case "Highest to Lowest Stocks":
-                sql = "SELECT * FROM products ORDER BY stockQuantity DESC";
+                sql += " ORDER BY stockQuantity DESC";
                 break;
-            case "Sort by Product ID":
-                sql = "SELECT * FROM products ORDER BY productID ASC";
+            case "Product ID":
+                sql += " ORDER BY CAST(productID AS UNSIGNED) ASC"; // Corrected numeric sorting
                 break;
+            case "Sort A-Z (Product Name)":
+                sql += " ORDER BY productName ASC";
+                break;
+            case "Sort Z-A (Product Name)":
+                sql += " ORDER BY productName DESC";
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Invalid sort option!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
         }
 
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 String productID = rs.getString("productID");
@@ -1063,14 +1084,12 @@ public class MainAdmin extends javax.swing.JFrame {
                 // Add row to table
                 model.addRow(new Object[]{productID, productName, category, price, stockQuantity});
             }
-
-            ps.close();
-            rs.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error Loading Data!");
+            JOptionPane.showMessageDialog(null, "Error Loading Data!", "Database Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
+
 
     // FOR JTABLE USER                                              
     private void fetchSalesData() {  // Modify method to not depend on ActionEvent
