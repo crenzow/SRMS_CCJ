@@ -27,6 +27,11 @@ public class MainUser extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         searchTXT = new javax.swing.JTextField();
@@ -55,6 +60,9 @@ public class MainUser extends javax.swing.JFrame {
         useridTXT = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,33 +76,74 @@ public class MainUser extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1171, Short.MAX_VALUE)
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 605));
+
+        jPanel8.setBackground(new java.awt.Color(204, 204, 255));
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setText("Sales Count:");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setText("Total Sales:");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel4))
+                    .addComponent(jLabel5))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("HOME", jPanel2);
+        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 580, 330));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1171, Short.MAX_VALUE)
+        jPanel9.setBackground(new java.awt.Color(204, 204, 255));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 54)); // NOI18N
+        jLabel6.setText("WELCOME USER!");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel6)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel6)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("PERFORMANCE", jPanel3);
+        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 280));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.addTab("             HOME             ", jPanel2);
+
+        jPanel5.setBackground(new java.awt.Color(204, 204, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         searchTXT.addActionListener(new java.awt.event.ActionListener() {
@@ -211,8 +260,9 @@ public class MainUser extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("WAREHOUSE", jPanel4);
+        jTabbedPane1.addTab("              WAREHOUSE             ", jPanel4);
 
+        jPanel6.setBackground(new java.awt.Color(204, 204, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -220,14 +270,19 @@ public class MainUser extends javax.swing.JFrame {
         jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("User id");
+        jLabel2.setText("User ID");
         jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
         jPanel6.add(quantitySpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 270, 50));
 
         productnameCMBBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ceremic Plates", "Silver Fork", "Glass Wine Goblet" }));
-        jPanel6.add(productnameCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 270, 55));
+        productnameCMBBX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productnameCMBBXActionPerformed(evt);
+            }
+        });
+        jPanel6.add(productnameCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 270, 55));
 
-        addsaleBTN.setText("add sale");
+        addsaleBTN.setText("ADD SALE");
         addsaleBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addsaleBTNActionPerformed(evt);
@@ -240,7 +295,7 @@ public class MainUser extends javax.swing.JFrame {
         jLabel3.setText("Product Name ");
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 84, -1, -1));
 
-        jTabbedPane1.addTab("ADD SALES", jPanel6);
+        jTabbedPane1.addTab("          ADD SALES           ", jPanel6);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -250,10 +305,10 @@ public class MainUser extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+            .addGap(0, 610, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("LOGOUT", jPanel7);
+        jTabbedPane1.addTab("        LOGOUT       ", jPanel7);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -265,6 +320,14 @@ public class MainUser extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
         );
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -285,7 +348,7 @@ public class MainUser extends javax.swing.JFrame {
         int selectedIndex = jTabbedPane1.getSelectedIndex();
 
     // Check if the "Logout" tab (index 5) is selected
-    if (selectedIndex == 4) {
+    if (selectedIndex == 3) {
         // Call the logout function to go back to Login frame
         logout();
     }
@@ -367,7 +430,7 @@ public class MainUser extends javax.swing.JFrame {
     }//GEN-LAST:event_filterCMBBXActionPerformed
 
     private void addsaleBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addsaleBTNActionPerformed
-         // Get the selected product name and quantity from the UI
+        // Get the selected product name and quantity from the UI
     String selectedProductName = (String) productnameCMBBX.getSelectedItem();
     int quantitySold = (int) quantitySpinner.getValue();  // Get quantity from JSpinner
 
@@ -377,20 +440,27 @@ public class MainUser extends javax.swing.JFrame {
     }
 
     // Get the user ID from the text field
-    int userID = Integer.parseInt(useridTXT.getText());  // Get userID from the text field
+    int userID = Integer.parseInt(useridTXT.getText());
 
     // Database connection
     Connection conn = DatabaseConnection.getInstance().getConnection();
-    String sql = "SELECT productID, price FROM products WHERE productName = ?";
-
+    
     try {
+        // Fetch product details (ID, price, stock)
+        String sql = "SELECT productID, price, stockQuantity FROM products WHERE productName = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, selectedProductName);  // Fetch product details
+        ps.setString(1, selectedProductName);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
             int productID = rs.getInt("productID");
             double productPrice = rs.getDouble("price");
+            int currentStock = rs.getInt("stockQuantity");  // Get current stock
+
+            if (currentStock < quantitySold) {
+                JOptionPane.showMessageDialog(null, "Insufficient stock!");
+                return;
+            }
 
             // Calculate total price (quantity * product price)
             double totalPrice = productPrice * quantitySold;
@@ -407,12 +477,20 @@ public class MainUser extends javax.swing.JFrame {
             insertPs.setDouble(3, totalPrice);
             insertPs.setInt(4, productID);
             insertPs.setInt(5, userID);
+            insertPs.executeUpdate();
 
-            insertPs.executeUpdate();  // Execute the insert query
+            // Update the stock in the products table
+            String updateStockSQL = "UPDATE products SET stockQuantity = stockQuantity - ? WHERE productID = ?";
+            PreparedStatement updatePs = conn.prepareStatement(updateStockSQL);
+            updatePs.setInt(1, quantitySold);
+            updatePs.setInt(2, productID);
+            updatePs.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Sale added successfully!");
+            JOptionPane.showMessageDialog(null, "Sale added successfully! Stock updated.");
 
+            // Close statements
             insertPs.close();
+            updatePs.close();
         } else {
             JOptionPane.showMessageDialog(null, "Product not found!");
         }
@@ -424,6 +502,10 @@ public class MainUser extends javax.swing.JFrame {
         e.printStackTrace();
     }
     }//GEN-LAST:event_addsaleBTNActionPerformed
+
+    private void productnameCMBBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productnameCMBBXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productnameCMBBXActionPerformed
 
     private void logout() {
         // Hide the current frame (MainAdmin or MainUser)
@@ -493,7 +575,7 @@ public class MainUser extends javax.swing.JFrame {
             case "Highest to Lowest Stocks":
                 sql = "SELECT * FROM products ORDER BY stockQuantity DESC";
                 break;
-            case "Sort by Product ID":
+            case "Product ID":
                 sql = "SELECT * FROM products ORDER BY productID ASC";
                 break;
         }
@@ -583,6 +665,12 @@ public class MainUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -590,6 +678,8 @@ public class MainUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
