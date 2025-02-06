@@ -3,6 +3,8 @@ package gui;
 import javax.swing.*;
 import java.sql.*;
 import dbConnection.DatabaseConnection;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 public class MainAdmin extends javax.swing.JFrame {
@@ -25,26 +27,33 @@ public class MainAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         label1 = new java.awt.Label();
+        jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
+        homePanel = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        salesPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         salesrecordTBL = new javax.swing.JTable();
-        date1TXT = new javax.swing.JTextField();
-        date2TXT = new javax.swing.JTextField();
         filterBTN = new javax.swing.JButton();
         totalsalesTXT = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        productstable = new javax.swing.JTable();
+        startDateChooser = new com.toedter.calendar.JDateChooser();
+        endDateChooser = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        deleteBTN = new javax.swing.JButton();
+        addBTN = new javax.swing.JButton();
+        updateBTN1 = new javax.swing.JButton();
+        refreshBTN = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        analyticsPanel = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        warehousePanel = new javax.swing.JPanel();
         stocksTXT = new javax.swing.JTextField();
         searchTXT = new javax.swing.JTextField();
         productidTXT = new javax.swing.JTextField();
@@ -62,7 +71,11 @@ public class MainAdmin extends javax.swing.JFrame {
         addproductBTN = new javax.swing.JButton();
         filterCMBBX = new javax.swing.JComboBox<>();
         clearBTN = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        productstable = new javax.swing.JTable();
+        refreshProducts = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        usersPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         userTBL = new javax.swing.JTable();
@@ -82,21 +95,31 @@ public class MainAdmin extends javax.swing.JFrame {
         searchuserBTN = new javax.swing.JButton();
         searchuserTXT = new javax.swing.JTextField();
         clearuserBTN = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
 
         label1.setText("label1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 650));
+        setPreferredSize(new java.awt.Dimension(1000, 650));
+        setResizable(false);
 
-        jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 650));
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(1000, 650));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1000, 650));
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        homePanel.setBackground(new java.awt.Color(204, 204, 255));
+        homePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/order.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +127,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        homePanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, 148, 119));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/multiple-users-silhouette (1).png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +135,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        homePanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, 148, 119));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/raw (1).png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +143,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+        homePanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 148, 119));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/data-analytics.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -125,60 +151,25 @@ public class MainAdmin extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
+        homePanel.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 148, 119));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 54)); // NOI18N
-        jLabel1.setText("WELCOME ADMIN!");
+        jLabel1.setText("WELCOME, ADMIN!");
+        homePanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel2.setText("\"Manage sales, track progress, and optimize performance—all in one place.\"");
+        homePanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel2)))
-                .addContainerGap(102, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(162, 162, 162))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
-        );
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel8.setText("jLabel6");
+        homePanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
 
-        jTabbedPane1.addTab("  HOME  ", jPanel3);
+        jTabbedPane1.addTab("    HOME    ", homePanel);
 
-        jPanel6.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel6.setForeground(new java.awt.Color(0, 255, 255));
+        salesPanel.setBackground(new java.awt.Color(204, 204, 255));
+        salesPanel.setForeground(new java.awt.Color(0, 255, 255));
+        salesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         salesrecordTBL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,77 +184,208 @@ public class MainAdmin extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(salesrecordTBL);
 
-        date2TXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                date2TXTActionPerformed(evt);
-            }
-        });
+        salesPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 89, 750, 437));
 
-        filterBTN.setText("Filter");
+        filterBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        filterBTN.setText("FILTER");
         filterBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterBTNActionPerformed(evt);
             }
         });
+        salesPanel.add(filterBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 80, 45));
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(date1TXT, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(date2TXT, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(filterBTN)
-                        .addGap(72, 72, 72)
-                        .addComponent(totalsalesTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(date1TXT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(date2TXT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalsalesTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
-        );
+        totalsalesTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalsalesTXTActionPerformed(evt);
+            }
+        });
+        salesPanel.add(totalsalesTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 110, 45));
+        salesPanel.add(startDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 158, 45));
+        salesPanel.add(endDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 149, 45));
 
-        jTabbedPane1.addTab("  SALES RECORD  ", jPanel6);
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("FROM:");
+        salesPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 50, 47));
 
-        jPanel5.setBackground(new java.awt.Color(204, 204, 255));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("TO:");
+        salesPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 30, 47));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1008, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
-        );
+        deleteBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        deleteBTN.setText("DELETE");
+        deleteBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBTNActionPerformed(evt);
+            }
+        });
+        salesPanel.add(deleteBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 490, 140, 40));
 
-        jTabbedPane1.addTab("  ANALYTICS  ", jPanel5);
+        addBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        addBTN.setText("ADD");
+        addBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBTNActionPerformed(evt);
+            }
+        });
+        salesPanel.add(addBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 370, 140, 40));
 
-        jPanel4.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        updateBTN1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        updateBTN1.setText("UPDATE");
+        updateBTN1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBTN1ActionPerformed(evt);
+            }
+        });
+        salesPanel.add(updateBTN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 430, 140, 40));
+
+        refreshBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-arrow.png"))); // NOI18N
+        refreshBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBTNActionPerformed(evt);
+            }
+        });
+        salesPanel.add(refreshBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 60, 45));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel7.setText("jLabel6");
+        salesPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
+
+        jTabbedPane1.addTab("SALES RECORD", salesPanel);
+
+        analyticsPanel.setBackground(new java.awt.Color(204, 204, 255));
+        analyticsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel10.setText("jLabel6");
+        analyticsPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
+
+        jTabbedPane1.addTab(" ANALYTICS ", analyticsPanel);
+
+        warehousePanel.setBackground(new java.awt.Color(204, 204, 255));
+        warehousePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        stocksTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stocksTXTActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(stocksTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 340, 140, 40));
+
+        searchTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTXTActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(searchTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 220, 40));
+
+        productidTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productidTXTActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(productidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, 140, 40));
+
+        productnameTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productnameTXTActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(productnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, 140, 40));
+
+        categoryTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryTXTActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(categoryTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 140, 40));
+
+        priceTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceTXTActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(priceTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 280, 140, 40));
+
+        searchBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        searchBTN.setText("SEARCH");
+        searchBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBTNActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(searchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 30, -1, 40));
+
+        productnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        productnameLBL.setText("Product Name:");
+        warehousePanel.add(productnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, 140, 40));
+
+        stocksLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        stocksLBL.setText("Stocks:");
+        warehousePanel.add(stocksLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 60, 40));
+
+        productidLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        productidLBL.setText("Product ID:");
+        warehousePanel.add(productidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 120, 40));
+
+        categoryLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        categoryLBL.setText("Category:");
+        warehousePanel.add(categoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, 90, 30));
+
+        priceLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        priceLBL.setText("Price:");
+        warehousePanel.add(priceLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, 90, 40));
+
+        deleteproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        deleteproductBTN.setText("DELETE");
+        deleteproductBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteproductBTNActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(deleteproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 450, 140, 40));
+
+        updateproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        updateproductBTN.setText("UPDATE");
+        updateproductBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateproductBTNActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(updateproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 400, 140, 40));
+
+        addproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        addproductBTN.setText("ADD");
+        addproductBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addproductBTNActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(addproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, 140, 40));
+
+        filterCMBBX.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        filterCMBBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Product ID", "Lowest to Highest Price", "Highest to Lowest Price", "Lowest to Highest Stocks", "Highest to Lowest Stocks", "Sort A-Z (Product Name)", "Sort Z-A (Product Name)" }));
+        filterCMBBX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterCMBBXActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(filterCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 190, 30));
+
+        clearBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        clearBTN.setText("CLEAR");
+        clearBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBTNActionPerformed(evt);
+            }
+        });
+        warehousePanel.add(clearBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 450, 140, 40));
+
+        jScrollPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         productstable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Product ID", "Product Name", "Category", "Price", "Stocks"
@@ -271,125 +393,21 @@ public class MainAdmin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(productstable);
 
-        jScrollPane2.setViewportView(jScrollPane1);
+        warehousePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 538, 448));
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 540, 450));
-
-        stocksTXT.addActionListener(new java.awt.event.ActionListener() {
+        refreshProducts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refreshSmall.png"))); // NOI18N
+        refreshProducts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stocksTXTActionPerformed(evt);
+                refreshProductsActionPerformed(evt);
             }
         });
-        jPanel4.add(stocksTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 140, 40));
+        warehousePanel.add(refreshProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 60, 30));
 
-        searchTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchTXTActionPerformed(evt);
-            }
-        });
-        jPanel4.add(searchTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 270, 40));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel6.setText("jLabel6");
+        warehousePanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
 
-        productidTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productidTXTActionPerformed(evt);
-            }
-        });
-        jPanel4.add(productidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 140, 40));
-
-        productnameTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productnameTXTActionPerformed(evt);
-            }
-        });
-        jPanel4.add(productnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 140, 40));
-
-        categoryTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryTXTActionPerformed(evt);
-            }
-        });
-        jPanel4.add(categoryTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, 140, 40));
-
-        priceTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceTXTActionPerformed(evt);
-            }
-        });
-        jPanel4.add(priceTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 140, 40));
-
-        searchBTN.setText("SEARCH");
-        searchBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBTNActionPerformed(evt);
-            }
-        });
-        jPanel4.add(searchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 30, -1, 40));
-
-        productnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        productnameLBL.setText("Product Name:");
-        jPanel4.add(productnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 120, 30));
-
-        stocksLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        stocksLBL.setText("Stocks:");
-        jPanel4.add(stocksLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 60, 30));
-
-        productidLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        productidLBL.setText("Product ID:");
-        jPanel4.add(productidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 90, 30));
-
-        categoryLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        categoryLBL.setText("Category:");
-        jPanel4.add(categoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 90, 30));
-
-        priceLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        priceLBL.setText("Price:");
-        jPanel4.add(priceLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 90, 30));
-
-        deleteproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        deleteproductBTN.setText("DELETE");
-        deleteproductBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteproductBTNActionPerformed(evt);
-            }
-        });
-        jPanel4.add(deleteproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 580, 140, -1));
-
-        updateproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        updateproductBTN.setText("UPDATE");
-        updateproductBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateproductBTNActionPerformed(evt);
-            }
-        });
-        jPanel4.add(updateproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 520, 140, -1));
-
-        addproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        addproductBTN.setText("ADD");
-        addproductBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addproductBTNActionPerformed(evt);
-            }
-        });
-        jPanel4.add(addproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 520, 140, 40));
-
-        filterCMBBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Product ID", "Lowest to Highest Price", "Highest to Lowest Price", "Lowest to Highest Stocks", "Highest to Lowest Stocks" }));
-        filterCMBBX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterCMBBXActionPerformed(evt);
-            }
-        });
-        jPanel4.add(filterCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 190, 30));
-
-        clearBTN.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        clearBTN.setText("CLEAR");
-        clearBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBTNActionPerformed(evt);
-            }
-        });
-        jPanel4.add(clearBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, 140, 40));
-
-        jTabbedPane1.addTab("  WAREHOUSE  ", jPanel4);
+        jTabbedPane1.addTab(" WAREHOUSE ", warehousePanel);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -407,32 +425,38 @@ public class MainAdmin extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(userTBL);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 485, 585));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 485, 270));
 
         passwordLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         passwordLBL.setText("Password:");
-        jPanel1.add(passwordLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
-        jPanel1.add(salespersonidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 110, 30));
-        jPanel1.add(passwordTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 110, 30));
+        jPanel1.add(passwordLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, -1, -1));
+        jPanel1.add(salespersonidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 140, 30));
+        jPanel1.add(passwordTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 140, 30));
 
         salespersonidLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         salespersonidLBL.setText("Salesperson's ID:");
-        jPanel1.add(salespersonidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+        jPanel1.add(salespersonidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, 30));
 
         fnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         fnameLBL.setText("First Name:");
-        jPanel1.add(fnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
-        jPanel1.add(fnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 110, 30));
+        jPanel1.add(fnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+
+        fnameTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnameTXTActionPerformed(evt);
+            }
+        });
+        jPanel1.add(fnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 140, 30));
 
         lnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lnameLBL.setText("Last Name:");
-        jPanel1.add(lnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
-        jPanel1.add(lnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 110, 30));
+        jPanel1.add(lnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, 30));
+        jPanel1.add(lnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 140, 30));
 
         emailLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         emailLBL.setText("Email:");
-        jPanel1.add(emailLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
-        jPanel1.add(emailTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 110, 30));
+        jPanel1.add(emailLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
+        jPanel1.add(emailTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 140, 30));
 
         adduserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         adduserBTN.setText("ADD");
@@ -441,7 +465,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 adduserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(adduserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 100, 40));
+        jPanel1.add(adduserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 140, 30));
 
         updateuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateuserBTN.setText("UPDATE");
@@ -450,7 +474,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 updateuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(updateuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 110, 40));
+        jPanel1.add(updateuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 140, 30));
 
         deleteuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         deleteuserBTN.setText("DELETE");
@@ -459,17 +483,17 @@ public class MainAdmin extends javax.swing.JFrame {
                 deleteuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(deleteuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 100, 40));
+        jPanel1.add(deleteuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 140, 30));
 
-        searchuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        searchuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         searchuserBTN.setText("SEARCH");
         searchuserBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(searchuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
-        jPanel1.add(searchuserTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 110, 30));
+        jPanel1.add(searchuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, 30));
+        jPanel1.add(searchuserTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 220, 30));
 
         clearuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         clearuserBTN.setText("CLEAR");
@@ -478,328 +502,175 @@ public class MainAdmin extends javax.swing.JFrame {
                 clearuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(clearuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 110, 40));
+        jPanel1.add(clearuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 140, 30));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel9.setText("jLabel6");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
+
+        javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
+        usersPanel.setLayout(usersPanelLayout);
+        usersPanelLayout.setHorizontalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        usersPanelLayout.setVerticalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("  USERS  ", jPanel2);
+        jTabbedPane1.addTab("   USERS   ", usersPanel);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1008, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("  LOGOUT  ", jPanel7);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void date2TXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_date2TXTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_date2TXTActionPerformed
-
-    private void priceTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTXTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceTXTActionPerformed
-
-    private void categoryTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryTXTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_categoryTXTActionPerformed
-
-    private void productnameTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productnameTXTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_productnameTXTActionPerformed
-
-    private void productidTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productidTXTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_productidTXTActionPerformed
-
-    private void searchTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTXTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchTXTActionPerformed
-
-    private void stocksTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stocksTXTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stocksTXTActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jTabbedPane1.setSelectedIndex(3); // Palitan ng tamang index ng "WAREHOUSE" tab
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
         // Get the selected index of the tab
-    int selectedIndex = jTabbedPane1.getSelectedIndex();
+        int selectedIndex = jTabbedPane1.getSelectedIndex();
 
-    // Check if the "Logout" tab (index 5) is selected
-    if (selectedIndex == 5) {
-        // Call the logout function to go back to Login frame
-        logout();
-    }
+        // Check if the "Logout" tab (index 5) is selected
+        if (selectedIndex == 5) {
+            // Call the logout function to go back to Login frame
+            logout();
+        }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void searchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBTNActionPerformed
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-        String searchQuery = searchTXT.getText().trim();
+    private void clearuserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearuserBTNActionPerformed
+        // Clear all text fields
+        searchuserTXT.setText("");
+        salespersonidTXT.setText("");
+        fnameTXT.setText("");
+        lnameTXT.setText("");
+        emailTXT.setText("");
+        passwordTXT.setText("");
 
-        if (searchQuery.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Enter Product ID or Name!");
-            return;
-        }
-
-        try {
-            String sql = "SELECT * FROM products WHERE productID = ? OR productName = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);  // Fix: changed `query` to `sql`
-            ps.setString(1, searchQuery);
-            ps.setString(2, searchQuery);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                productidTXT.setText(rs.getString("productID"));
-                productnameTXT.setText(rs.getString("productName"));
-                categoryTXT.setText(rs.getString("category"));
-                priceTXT.setText(rs.getString("price"));
-                stocksTXT.setText(rs.getString("stockQuantity"));
-                searchTXT.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Product Not Found!");
-            }
-
-            // Close resources
-            rs.close();
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error Retrieving Data!");
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_searchBTNActionPerformed
-
-    private void updateproductBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateproductBTNActionPerformed
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-        String productID = productidTXT.getText().trim();
-        String productName = productnameTXT.getText().trim();
-        String category = categoryTXT.getText().trim();
-        String price = priceTXT.getText().trim();
-        String stockQuantity = stocksTXT.getText().trim();
-
-        // Check if productID is empty
-        if (productID.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Search for a product before updating!");
-            return;
-        }
-
-        // Confirmation dialog
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this product?", "Confirm Update", JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) {
-            return; // If user selects NO, exit the method
-        }
-
-        try {
-            String sql = "UPDATE products SET productName = ?, category = ?, price = ?, stockQuantity = ? WHERE productID = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, productName);
-            ps.setString(2, category);
-            ps.setString(3, price);
-            ps.setString(4, stockQuantity);
-            ps.setString(5, productID);
-
-            int rowsUpdated = ps.executeUpdate(); // Execute update query
-
-            if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(null, "Product Updated Successfully!");
-
-                // Refresh the table after updating
-                loadProductsTable();
-            } else {
-                JOptionPane.showMessageDialog(null, "Update Failed. Please check Product ID.");
-            }
-
-            ps.close(); // Close statement
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error Updating Data!");
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_updateproductBTNActionPerformed
-
-    private void addproductBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addproductBTNActionPerformed
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-        String productID = productidTXT.getText().trim();
-        String productName = productnameTXT.getText().trim();
-        String category = categoryTXT.getText().trim();
-        String price = priceTXT.getText().trim();
-        String stockQuantity = stocksTXT.getText().trim();
-
-        // Check if any field is empty
-        if (productID.isEmpty() || productName.isEmpty() || category.isEmpty() || price.isEmpty() || stockQuantity.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields are required!");
-            return;
-        }
-
-        // Confirmation dialog
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to add this product?", "Confirm Add", JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) {
-            return; // If user selects NO, exit the method
-        }
-
-        try {
-            String sql = "INSERT INTO products (productID, productName, category, price, stockQuantity) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, productID);
-            ps.setString(2, productName);
-            ps.setString(3, category);
-            ps.setString(4, price);
-            ps.setString(5, stockQuantity);
-
-            int rowsInserted = ps.executeUpdate(); // Execute insert query
-
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(null, "Product Added Successfully!");
-
-                // Clear the text fields after adding
-                productidTXT.setText("");
-                productnameTXT.setText("");
-                categoryTXT.setText("");
-                priceTXT.setText("");
-                stocksTXT.setText("");
-
-                // Refresh the table after adding
-                loadProductsTable(); 
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to Add Product!");
-            }
-
-            ps.close(); // Close statement
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error Adding Data!");
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_addproductBTNActionPerformed
-
-    private void deleteproductBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteproductBTNActionPerformed
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-    String productID = productidTXT.getText().trim();
-
-    // Check if productID is empty
-    if (productID.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Enter Product ID to Delete!", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Confirmation dialog
-    int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this product?", 
-                                                "Confirm Delete", JOptionPane.YES_NO_OPTION);
-    if (confirm != JOptionPane.YES_OPTION) {
-        return; // If user selects NO, exit the method
-    }
-
-    try {
-        String sql = "DELETE FROM products WHERE productID = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, productID);
-
-        int rowsDeleted = ps.executeUpdate(); // Execute delete query
-
-        if (rowsDeleted > 0) {
-            JOptionPane.showMessageDialog(null, "Product Deleted Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-            // Clear text fields after deleting
-            searchTXT.setText("");
-            productidTXT.setText("");
-            productnameTXT.setText("");
-            categoryTXT.setText("");
-            priceTXT.setText("");
-            stocksTXT.setText("");
-
-            // Refresh the table after deletion
-            loadProductsTable();
-        } else {
-            JOptionPane.showMessageDialog(null, "Product Not Found!", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-
-        ps.close(); // Close statement
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error Deleting Data!", "Database Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    }
-    }//GEN-LAST:event_deleteproductBTNActionPerformed
-
-    private void filterCMBBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCMBBXActionPerformed
-        String selectedOption = (String) filterCMBBX.getSelectedItem();
-        sortProductsTable(selectedOption);
-    }//GEN-LAST:event_filterCMBBXActionPerformed
+        // Optionally, reset the focus to the first text field (for better user experience)
+        salespersonidTXT.requestFocus();
+    }//GEN-LAST:event_clearuserBTNActionPerformed
 
     private void searchuserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchuserBTNActionPerformed
         // Get the search query from the text field
-    String searchQuery = searchuserTXT.getText().trim();
+        String searchQuery = searchuserTXT.getText().trim();
 
-    if (searchQuery.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please enter a search term!");
-        return;
-    }
-
-    // Database connection
-    Connection conn = DatabaseConnection.getInstance().getConnection();
-
-    // SQL query to search by userID, firstName, or lastName
-    String sql = "SELECT * FROM users WHERE userID = ? OR firstName LIKE ? OR lastName LIKE ?";
-
-    try {
-        PreparedStatement ps = conn.prepareStatement(sql);
-
-        // Set parameters for the query
-        ps.setString(1, searchQuery); // Exact match for userID
-        ps.setString(2, "%" + searchQuery + "%"); // Search by firstName (partial match)
-        ps.setString(3, "%" + searchQuery + "%"); // Search by lastName (partial match)
-
-        ResultSet rs = ps.executeQuery();
-
-        // If a record is found, populate the text fields
-        if (rs.next()) {
-            salespersonidTXT.setText(rs.getString("userID"));
-            fnameTXT.setText(rs.getString("firstName"));
-            lnameTXT.setText(rs.getString("lastName"));
-            emailTXT.setText(rs.getString("email"));
-            passwordTXT.setText(rs.getString("password"));
-        } else {
-            JOptionPane.showMessageDialog(null, "User not found!");
+        if (searchQuery.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter a search term!");
+            return;
         }
 
-        ps.close();
-        rs.close();
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error retrieving data!");
-        e.printStackTrace();
-    }
+        // Database connection
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+
+        // SQL query to search by userID, firstName, or lastName
+        String sql = "SELECT * FROM users WHERE userID = ? OR firstName LIKE ? OR lastName LIKE ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            // Set parameters for the query
+            ps.setString(1, searchQuery); // Exact match for userID
+            ps.setString(2, "%" + searchQuery + "%"); // Search by firstName (partial match)
+            ps.setString(3, "%" + searchQuery + "%"); // Search by lastName (partial match)
+
+            ResultSet rs = ps.executeQuery();
+
+            // If a record is found, populate the text fields
+            if (rs.next()) {
+                salespersonidTXT.setText(rs.getString("userID"));
+                fnameTXT.setText(rs.getString("firstName"));
+                lnameTXT.setText(rs.getString("lastName"));
+                emailTXT.setText(rs.getString("email"));
+                passwordTXT.setText(rs.getString("password"));
+            } else {
+                JOptionPane.showMessageDialog(null, "User not found!");
+            }
+
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error retrieving data!");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_searchuserBTNActionPerformed
+
+    private void deleteuserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteuserBTNActionPerformed
+        // Get the userID from the text field
+        String userID = salespersonidTXT.getText().trim();
+
+        // Validate that userID is provided
+        if (userID.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter the User ID to delete!");
+            return;
+        }
+
+        // Database connection
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+
+        // SQL query to delete a user by userID
+        String sql = "DELETE FROM users WHERE userID = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            // Set the userID to delete
+            ps.setString(1, userID);
+
+            // Execute the update and check if any rows were affected
+            int rowsAffected = ps.executeUpdate();
+
+            // If the user was deleted successfully
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "User deleted successfully!");
+            } else {
+                JOptionPane.showMessageDialog(null, "User not found!");
+            }
+
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error deleting user!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_deleteuserBTNActionPerformed
 
     private void updateuserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateuserBTNActionPerformed
         // Get the updated values from the text fields
@@ -895,58 +766,6 @@ public class MainAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_adduserBTNActionPerformed
 
-    private void deleteuserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteuserBTNActionPerformed
-        // Get the userID from the text field
-        String userID = salespersonidTXT.getText().trim();
-
-        // Validate that userID is provided
-        if (userID.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter the User ID to delete!");
-            return;
-        }
-
-        // Database connection
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-
-        // SQL query to delete a user by userID
-        String sql = "DELETE FROM users WHERE userID = ?";
-
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-
-            // Set the userID to delete
-            ps.setString(1, userID);
-
-            // Execute the update and check if any rows were affected
-            int rowsAffected = ps.executeUpdate();
-
-            // If the user was deleted successfully
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "User deleted successfully!");
-            } else {
-                JOptionPane.showMessageDialog(null, "User not found!");
-            }
-
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error deleting user!");
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_deleteuserBTNActionPerformed
-
-    private void clearuserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearuserBTNActionPerformed
-        // Clear all text fields
-        searchuserTXT.setText("");
-        salespersonidTXT.setText("");
-        fnameTXT.setText("");
-        lnameTXT.setText("");
-        emailTXT.setText("");
-        passwordTXT.setText("");
-
-        // Optionally, reset the focus to the first text field (for better user experience)
-        salespersonidTXT.requestFocus();
-    }//GEN-LAST:event_clearuserBTNActionPerformed
-
     private void clearBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBTNActionPerformed
         // Clear all text fields
         searchTXT.setText("");
@@ -955,16 +774,236 @@ public class MainAdmin extends javax.swing.JFrame {
         categoryTXT.setText("");
         priceTXT.setText("");
         stocksTXT.setText("");
-        
+
     }//GEN-LAST:event_clearBTNActionPerformed
+
+    private void filterCMBBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCMBBXActionPerformed
+        String selectedOption = (String) filterCMBBX.getSelectedItem();
+        sortProductsTable(selectedOption);
+    }//GEN-LAST:event_filterCMBBXActionPerformed
+
+    private void addproductBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addproductBTNActionPerformed
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        String productID = productidTXT.getText().trim();
+        String productName = productnameTXT.getText().trim();
+        String category = categoryTXT.getText().trim();
+        String price = priceTXT.getText().trim();
+        String stockQuantity = stocksTXT.getText().trim();
+
+        // Check if any field is empty
+        if (productID.isEmpty() || productName.isEmpty() || category.isEmpty() || price.isEmpty() || stockQuantity.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All fields are required!");
+            return;
+        }
+
+        // Confirmation dialog
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to add this product?", "Confirm Add", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; // If user selects NO, exit the method
+        }
+
+        try {
+            String sql = "INSERT INTO products (productID, productName, category, price, stockQuantity) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, productID);
+            ps.setString(2, productName);
+            ps.setString(3, category);
+            ps.setString(4, price);
+            ps.setString(5, stockQuantity);
+
+            int rowsInserted = ps.executeUpdate(); // Execute insert query
+
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(null, "Product Added Successfully!");
+
+                // Clear the text fields after adding
+                productidTXT.setText("");
+                productnameTXT.setText("");
+                categoryTXT.setText("");
+                priceTXT.setText("");
+                stocksTXT.setText("");
+
+                // Refresh the table after adding
+                loadProductsTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to Add Product!");
+            }
+
+            ps.close(); // Close statement
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error Adding Data!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_addproductBTNActionPerformed
+
+    private void updateproductBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateproductBTNActionPerformed
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        String productID = productidTXT.getText().trim();
+        String productName = productnameTXT.getText().trim();
+        String category = categoryTXT.getText().trim();
+        String price = priceTXT.getText().trim();
+        String stockQuantity = stocksTXT.getText().trim();
+
+        // Check if productID is empty
+        if (productID.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Search for a product before updating!");
+            return;
+        }
+
+        // Confirmation dialog
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to update this product?", "Confirm Update", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; // If user selects NO, exit the method
+        }
+
+        try {
+            String sql = "UPDATE products SET productName = ?, category = ?, price = ?, stockQuantity = ? WHERE productID = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, productName);
+            ps.setString(2, category);
+            ps.setString(3, price);
+            ps.setString(4, stockQuantity);
+            ps.setString(5, productID);
+
+            int rowsUpdated = ps.executeUpdate(); // Execute update query
+
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Product Updated Successfully!");
+
+                // Refresh the table after updating
+                loadProductsTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Update Failed. Please check Product ID.");
+            }
+
+            ps.close(); // Close statement
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error Updating Data!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_updateproductBTNActionPerformed
+
+    private void deleteproductBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteproductBTNActionPerformed
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        String productID = productidTXT.getText().trim();
+
+        // Check if productID is empty
+        if (productID.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter Product ID to Delete!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Confirmation dialog
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this product?",
+            "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; // If user selects NO, exit the method
+        }
+
+        try {
+            String sql = "DELETE FROM products WHERE productID = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, productID);
+
+            int rowsDeleted = ps.executeUpdate(); // Execute delete query
+
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Product Deleted Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                // Clear text fields after deleting
+                searchTXT.setText("");
+                productidTXT.setText("");
+                productnameTXT.setText("");
+                categoryTXT.setText("");
+                priceTXT.setText("");
+                stocksTXT.setText("");
+
+                // Refresh the table after deletion
+                loadProductsTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Product Not Found!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+            ps.close(); // Close statement
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error Deleting Data!", "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_deleteproductBTNActionPerformed
+
+    private void searchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBTNActionPerformed
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        String searchQuery = searchTXT.getText().trim();
+
+        if (searchQuery.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter Product ID or Name!");
+            return;
+        }
+
+        try {
+            String sql = "SELECT * FROM products WHERE productID = ? OR productName = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);  // Fix: changed `query` to `sql`
+            ps.setString(1, searchQuery);
+            ps.setString(2, searchQuery);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                productidTXT.setText(rs.getString("productID"));
+                productnameTXT.setText(rs.getString("productName"));
+                categoryTXT.setText(rs.getString("category"));
+                priceTXT.setText(rs.getString("price"));
+                stocksTXT.setText(rs.getString("stockQuantity"));
+                searchTXT.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Product Not Found!");
+            }
+
+            // Close resources
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error Retrieving Data!");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_searchBTNActionPerformed
+
+    private void priceTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceTXTActionPerformed
+
+    private void categoryTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoryTXTActionPerformed
+
+    private void productnameTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productnameTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productnameTXTActionPerformed
+
+    private void productidTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productidTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productidTXTActionPerformed
+
+    private void searchTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTXTActionPerformed
+
+    private void stocksTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stocksTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stocksTXTActionPerformed
+
+    private void totalsalesTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalsalesTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalsalesTXTActionPerformed
 
     private void filterBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBTNActionPerformed
         // Get the start and end dates from the text fields
-        String startDate = date1TXT.getText().trim();
-        String endDate = date2TXT.getText().trim();
+        // String startDate = startDateTXT.getText().trim();
+        Date startDate = new java.sql.Date(startDateChooser.getDate().getTime());
+        // String endDate = endDateTXT.getText().trim();
+        Date endDate = new java.sql.Date(endDateChooser.getDate().getTime());
 
         // Check if the dates are provided
-        if (startDate.isEmpty() || endDate.isEmpty()) {
+        if (startDate == null || endDate == null) {
             JOptionPane.showMessageDialog(null, "Please enter both start and end dates!");
             return;
         }
@@ -974,18 +1013,18 @@ public class MainAdmin extends javax.swing.JFrame {
 
         // SQL query to filter sales by the date range
         String sql = "SELECT s.salesID, CONCAT(u.firstName, ' ', u.lastName) AS salesPerson, "
-                   + "p.productName, s.quantitySold, s.totalPrice AS sales, s.saleDate "
-                   + "FROM sales s "
-                   + "JOIN users u ON s.userID = u.userID "
-                   + "JOIN products p ON s.productID = p.productID "
-                   + "WHERE s.saleDate BETWEEN ? AND ?";  // Filtering based on date range
+        + "p.productName, s.quantitySold, s.totalPrice AS sales, s.saleDate "
+        + "FROM sales s "
+        + "JOIN users u ON s.userID = u.userID "
+        + "JOIN products p ON s.productID = p.productID "
+        + "WHERE s.saleDate BETWEEN ? AND ?";  // Filtering based on date range
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
 
             // Set the start and end dates for the query
-            ps.setString(1, startDate);
-            ps.setString(2, endDate);
+            ps.setDate(1, startDate);
+            ps.setDate(2, endDate);
 
             ResultSet rs = ps.executeQuery();
 
@@ -1002,6 +1041,8 @@ public class MainAdmin extends javax.swing.JFrame {
 
             // Variable to store the total sales
             double totalSales = 0;
+            
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
 
             // Adding fetched data into the table model
             while (rs.next()) {
@@ -1011,9 +1052,11 @@ public class MainAdmin extends javax.swing.JFrame {
                 int quantitySold = rs.getInt("quantitySold");
                 double sales = rs.getDouble("sales");
                 Date saleDate = rs.getDate("saleDate");
+                
+                String formattedSales = currencyFormat.format(sales);
 
                 // Adding row to the table
-                tableModel.addRow(new Object[] { salesID, salesPerson, productName, quantitySold, sales, saleDate });
+                tableModel.addRow(new Object[] { salesID, salesPerson, productName, quantitySold, formattedSales, saleDate });
 
                 // Accumulate the total sales
                 totalSales += sales;
@@ -1023,7 +1066,10 @@ public class MainAdmin extends javax.swing.JFrame {
             salesrecordTBL.setModel(tableModel);
 
             // Display the total sales in the text field
-            totalsalesTXT.setText(String.format("%.2f", totalSales));
+            //totalsalesTXT.setText(String.format("%.2f", totalSales));
+            
+         //   NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
+            totalsalesTXT.setText(currencyFormat.format(totalSales));
 
             // Close the ResultSet and PreparedStatement
             rs.close();
@@ -1034,17 +1080,47 @@ public class MainAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_filterBTNActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jTabbedPane1.setSelectedIndex(4);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        jTabbedPane1.setSelectedIndex(2);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTabbedPane1.setSelectedIndex(4);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTabbedPane1.setSelectedIndex(3); // Palitan ng tamang index ng "WAREHOUSE" tab
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void fnameTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnameTXTActionPerformed
+
+    private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBTNActionPerformed
+
+    private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addBTNActionPerformed
+
+    private void updateBTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBTN1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBTN1ActionPerformed
+
+    private void refreshBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBTNActionPerformed
+        // TODO add your handling code here:
+        salesRecordData();
+    }//GEN-LAST:event_refreshBTNActionPerformed
+
+    private void refreshProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshProductsActionPerformed
+        // TODO add your handling code here:
+        loadProductsTable();
+    }//GEN-LAST:event_refreshProductsActionPerformed
 
     private void logout() {
         // Hide the current frame (MainAdmin or MainUser)
@@ -1074,17 +1150,23 @@ public class MainAdmin extends javax.swing.JFrame {
             String sql = "SELECT * FROM products";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
 
             while (rs.next()) {
                 // Get data from ResultSet
                 String productID = rs.getString("productID");
                 String productName = rs.getString("productName");
                 String category = rs.getString("category");
-                String price = rs.getString("price");
+             //   String price = rs.getString("price");
                 String stockQuantity = rs.getString("stockQuantity");
+                
+                // Convert price from String to double, then format it
+            double priceValue = Double.parseDouble(rs.getString("price"));  // Convert string to double
+            String formattedPrice = currencyFormat.format(priceValue); // Format with ₱ and commas
 
                 // Add row to table
-                model.addRow(new Object[]{productID, productName, category, price, stockQuantity});
+                model.addRow(new Object[]{productID, productName, category, formattedPrice, stockQuantity});
             }
 
             ps.close();
@@ -1134,16 +1216,22 @@ public class MainAdmin extends javax.swing.JFrame {
 
         try (PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
+            
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
 
             while (rs.next()) {
                 String productID = rs.getString("productID");
                 String productName = rs.getString("productName");
                 String category = rs.getString("category");
-                String price = rs.getString("price");
+               // String price = rs.getString("price");
                 String stockQuantity = rs.getString("stockQuantity");
+                
+                double priceValue = Double.parseDouble(rs.getString("price"));  // Convert string to double
+            String formattedPrice = currencyFormat.format(priceValue); // Format with ₱ and commas
+
 
                 // Add row to table
-                model.addRow(new Object[]{productID, productName, category, price, stockQuantity});
+                model.addRow(new Object[]{productID, productName, category, formattedPrice, stockQuantity});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error Loading Data!", "Database Error", JOptionPane.ERROR_MESSAGE);
@@ -1172,14 +1260,18 @@ public class MainAdmin extends javax.swing.JFrame {
             DefaultTableModel tableModel = new DefaultTableModel();
             tableModel.addColumn("Full Name");
             tableModel.addColumn("Total Revenue");
+            
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
 
             // Display the fetched data in JTable (or use it as needed)
             while (rs.next()) {
                 String fullName = rs.getString("fullName");
                 double totalRevenue = rs.getDouble("totalRevenue");
+                
+                String formattedRevenue = currencyFormat.format(totalRevenue);
 
                 // Add data to the JTable
-                tableModel.addRow(new Object[]{fullName, totalRevenue});
+                tableModel.addRow(new Object[]{fullName, formattedRevenue});
             }
 
             // Assuming you have a JTable named salesTable
@@ -1202,7 +1294,9 @@ public class MainAdmin extends javax.swing.JFrame {
                    + "p.productName, s.quantitySold, s.totalPrice AS sales, s.saleDate "
                    + "FROM sales s "
                    + "JOIN users u ON s.userID = u.userID "
-                   + "JOIN products p ON s.productID = p.productID";
+                   + "JOIN products p ON s.productID = p.productID "
+                   + "ORDER BY s.salesID ASC";        // Sort by salesID in ascending order
+
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -1221,6 +1315,8 @@ public class MainAdmin extends javax.swing.JFrame {
 
             // Variable to accumulate the total sales
             double totalSales = 0;
+            // Currency formatter for Philippine Peso
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
 
             // Adding fetched data into the table model
             while (rs.next()) {
@@ -1230,9 +1326,12 @@ public class MainAdmin extends javax.swing.JFrame {
                 int quantitySold = rs.getInt("quantitySold");
                 double sales = rs.getDouble("sales");
                 Date saleDate = rs.getDate("saleDate");
+                
+                // Format sales amount
+                String formattedSales = currencyFormat.format(sales);
 
                 // Add the row to the JTable
-                tableModel.addRow(new Object[]{salesID, salesPerson, productName, quantitySold, sales, saleDate});
+                tableModel.addRow(new Object[]{salesID, salesPerson, productName, quantitySold, formattedSales, saleDate});
 
                 // Accumulate the total sales
                 totalSales += sales;
@@ -1242,7 +1341,10 @@ public class MainAdmin extends javax.swing.JFrame {
             salesrecordTBL.setModel(tableModel);
 
             // Update the total sales in the text field
-            totalsalesTXT.setText(String.format("%.2f", totalSales));
+            //totalsalesTXT.setText(String.format("%.2f", totalSales));
+         //   NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
+            totalsalesTXT.setText(currencyFormat.format(totalSales));
+
 
             // Close the resources
             ps.close();
@@ -1252,8 +1354,8 @@ public class MainAdmin extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
-
+    
+   
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1289,37 +1391,42 @@ public class MainAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBTN;
     private javax.swing.JButton addproductBTN;
     private javax.swing.JButton adduserBTN;
+    private javax.swing.JPanel analyticsPanel;
     private javax.swing.JLabel categoryLBL;
     private javax.swing.JTextField categoryTXT;
     private javax.swing.JButton clearBTN;
     private javax.swing.JButton clearuserBTN;
-    private javax.swing.JTextField date1TXT;
-    private javax.swing.JTextField date2TXT;
+    private javax.swing.JButton deleteBTN;
     private javax.swing.JButton deleteproductBTN;
     private javax.swing.JButton deleteuserBTN;
     private javax.swing.JLabel emailLBL;
     private javax.swing.JTextField emailTXT;
+    private com.toedter.calendar.JDateChooser endDateChooser;
     private javax.swing.JButton filterBTN;
     private javax.swing.JComboBox<String> filterCMBBX;
     private javax.swing.JLabel fnameLBL;
     private javax.swing.JTextField fnameTXT;
+    private javax.swing.JPanel homePanel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -1335,6 +1442,9 @@ public class MainAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel productnameLBL;
     private javax.swing.JTextField productnameTXT;
     private javax.swing.JTable productstable;
+    private javax.swing.JButton refreshBTN;
+    private javax.swing.JButton refreshProducts;
+    private javax.swing.JPanel salesPanel;
     private javax.swing.JLabel salespersonidLBL;
     private javax.swing.JTextField salespersonidTXT;
     private javax.swing.JTable salesrecordTBL;
@@ -1342,11 +1452,15 @@ public class MainAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField searchTXT;
     private javax.swing.JButton searchuserBTN;
     private javax.swing.JTextField searchuserTXT;
+    private com.toedter.calendar.JDateChooser startDateChooser;
     private javax.swing.JLabel stocksLBL;
     private javax.swing.JTextField stocksTXT;
     private javax.swing.JTextField totalsalesTXT;
+    private javax.swing.JButton updateBTN1;
     private javax.swing.JButton updateproductBTN;
     private javax.swing.JButton updateuserBTN;
     private javax.swing.JTable userTBL;
+    private javax.swing.JPanel usersPanel;
+    private javax.swing.JPanel warehousePanel;
     // End of variables declaration//GEN-END:variables
 }

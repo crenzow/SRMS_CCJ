@@ -38,21 +38,4 @@ public class DatabaseConnection {
     public Connection getConnection() {
         return connection;
     }
-    
-    
-    
-
-    // Method to close the connection
-    public static void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-                connection = null;
-                System.out.println("Database connection closed.");
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Failed to close database connection.");
-            }
-        }
-    }
 }

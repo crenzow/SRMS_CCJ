@@ -2,22 +2,52 @@
 package gui;
 
 import dbConnection.DatabaseConnection;
+import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import java.util.*;
+
 
 
 public class MainUser extends javax.swing.JFrame {
+    private int userID;
+
+    
 
 
-    public MainUser() {
+    public MainUser(int userID) {
+        this.userID = userID;
         initComponents();
         loadProductsTable();
-        setLocationRelativeTo(null);
+        loadUserData();
+        salesRecordData();
+        loadProductNames(productNameCombo);
+        loadUserTotalSales();
+        loadUserTotalProductsSold();
+        loadMostSoldProduct();
+        loadBestSellingCategory();
+        displaySalesPieChart();
+        
+        
     }
+    public MainUser() {
+        this(0); // Calls the other constructor with default userID = 0
+    } 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -25,19 +55,23 @@ public class MainUser extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        homePanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        welcomeLBL = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        bestSellingCategoryLBL = new javax.swing.JLabel();
+        mostSoldProductLBL = new javax.swing.JLabel();
+        totalProductsLBL = new javax.swing.JLabel();
+        totalSalesLBL = new javax.swing.JLabel();
+        label1 = new javax.swing.JLabel();
+        label2 = new javax.swing.JLabel();
+        label3 = new javax.swing.JLabel();
+        label4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        warehousePanel = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         searchTXT = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        productstable = new javax.swing.JTable();
         searchBTN = new javax.swing.JButton();
         productidLBL = new javax.swing.JLabel();
         productidTXT = new javax.swing.JTextField();
@@ -51,97 +85,104 @@ public class MainUser extends javax.swing.JFrame {
         stocksTXT = new javax.swing.JTextField();
         clearBTN = new javax.swing.JButton();
         filterCMBBX = new javax.swing.JComboBox<>();
-        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        productstable = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        salesPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         quantitySpinner = new javax.swing.JSpinner();
-        productnameCMBBX = new javax.swing.JComboBox<>();
+        productNameCombo = new javax.swing.JComboBox<>();
         addsaleBTN = new javax.swing.JButton();
-        useridTXT = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        salesRecordTable = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        logoutPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 650));
+        setPreferredSize(new java.awt.Dimension(1000, 650));
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(1000, 650));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1000, 650));
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        homePanel.setBackground(new java.awt.Color(153, 153, 255));
+        homePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 605));
+        homePanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 605));
 
-        jPanel8.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel5.setText("Sales Count:");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel4.setText("Total Sales:");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel4))
-                    .addComponent(jLabel5))
-                .addContainerGap(358, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addContainerGap(204, Short.MAX_VALUE))
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 580, 330));
+        homePanel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 500, 284));
 
-        jPanel9.setBackground(new java.awt.Color(204, 204, 255));
+        welcomeLBL.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        welcomeLBL.setText("WELCOME! ");
+        homePanel.add(welcomeLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 470, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 54)); // NOI18N
-        jLabel6.setText("WELCOME USER!");
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setLayout(null);
+        homePanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 284, 500, 330));
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel6)
-                .addContainerGap(130, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel6)
-                .addContainerGap(158, Short.MAX_VALUE))
-        );
+        bestSellingCategoryLBL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        bestSellingCategoryLBL.setText("Best Category");
+        homePanel.add(bestSellingCategoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, 230, 40));
 
-        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 280));
+        mostSoldProductLBL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        mostSoldProductLBL.setText("Product");
+        homePanel.add(mostSoldProductLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 410, 250, 40));
 
-        jTabbedPane1.addTab("             HOME             ", jPanel2);
+        totalProductsLBL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        totalProductsLBL.setText("Total Products");
+        homePanel.add(totalProductsLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 360, 240, 40));
+
+        totalSalesLBL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        totalSalesLBL.setText("Sales");
+        homePanel.add(totalSalesLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 300, 40));
+
+        label1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        label1.setText("My Total Sales: ");
+        homePanel.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 220, 40));
+
+        label2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        label2.setText("Total Products Sold: ");
+        homePanel.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 240, 40));
+
+        label3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        label3.setText("Most Sold Product:");
+        homePanel.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 230, 40));
+
+        label4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        label4.setText("Best Selling Category:");
+        homePanel.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 260, 40));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel10.setText("jLabel6");
+        homePanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
+
+        jTabbedPane1.addTab("HOME", homePanel);
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,7 +192,89 @@ public class MainUser extends javax.swing.JFrame {
                 searchTXTActionPerformed(evt);
             }
         });
-        jPanel5.add(searchTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 270, 40));
+        jPanel5.add(searchTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 250, 40));
+
+        searchBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        searchBTN.setText("SEARCH");
+        searchBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBTNActionPerformed(evt);
+            }
+        });
+        jPanel5.add(searchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, 40));
+
+        productidLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        productidLBL.setText("Product ID:");
+        jPanel5.add(productidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 130, 30));
+
+        productidTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productidTXTActionPerformed(evt);
+            }
+        });
+        jPanel5.add(productidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 130, 140, 40));
+
+        productnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        productnameLBL.setText("Product Name:");
+        jPanel5.add(productnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 140, 40));
+
+        productnameTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productnameTXTActionPerformed(evt);
+            }
+        });
+        jPanel5.add(productnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 190, 140, 40));
+
+        categoryLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        categoryLBL.setText("Category:");
+        jPanel5.add(categoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 90, 30));
+
+        categoryTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryTXTActionPerformed(evt);
+            }
+        });
+        jPanel5.add(categoryTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 260, 140, 40));
+
+        priceLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        priceLBL.setText("Price:");
+        jPanel5.add(priceLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 90, 30));
+
+        priceTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceTXTActionPerformed(evt);
+            }
+        });
+        jPanel5.add(priceTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 320, 140, 40));
+
+        stocksLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        stocksLBL.setText("Stocks:");
+        jPanel5.add(stocksLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 60, 30));
+
+        stocksTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stocksTXTActionPerformed(evt);
+            }
+        });
+        jPanel5.add(stocksTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 380, 140, 40));
+
+        clearBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        clearBTN.setText("CLEAR");
+        clearBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBTNActionPerformed(evt);
+            }
+        });
+        jPanel5.add(clearBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 450, 140, 40));
+
+        filterCMBBX.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        filterCMBBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Product ID", "Lowest to Highest Price", "Highest to Lowest Price", "Lowest to Highest Stocks", "Highest to Lowest Stocks", "Sort A-Z (Product Name)", "Sort Z-A (Product Name)" }));
+        filterCMBBX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterCMBBXActionPerformed(evt);
+            }
+        });
+        jPanel5.add(filterCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 190, 30));
 
         productstable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,168 +289,101 @@ public class MainUser extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(productstable);
 
-        jScrollPane2.setViewportView(jScrollPane1);
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
 
-        jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 460, 410));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel8.setText("jLabel6");
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
 
-        searchBTN.setText("SEARCH");
-        searchBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBTNActionPerformed(evt);
-            }
-        });
-        jPanel5.add(searchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, 40));
-
-        productidLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        productidLBL.setText("Product ID:");
-        jPanel5.add(productidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 90, 30));
-
-        productidTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productidTXTActionPerformed(evt);
-            }
-        });
-        jPanel5.add(productidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 140, 40));
-
-        productnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        productnameLBL.setText("Product Name:");
-        jPanel5.add(productnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 120, 30));
-
-        productnameTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productnameTXTActionPerformed(evt);
-            }
-        });
-        jPanel5.add(productnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 140, 40));
-
-        categoryLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        categoryLBL.setText("Category:");
-        jPanel5.add(categoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 90, 30));
-
-        categoryTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryTXTActionPerformed(evt);
-            }
-        });
-        jPanel5.add(categoryTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, 140, 40));
-
-        priceLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        priceLBL.setText("Price:");
-        jPanel5.add(priceLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 90, 30));
-
-        priceTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceTXTActionPerformed(evt);
-            }
-        });
-        jPanel5.add(priceTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 140, 40));
-
-        stocksLBL.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        stocksLBL.setText("Stocks:");
-        jPanel5.add(stocksLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 60, 30));
-
-        stocksTXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stocksTXTActionPerformed(evt);
-            }
-        });
-        jPanel5.add(stocksTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 140, 40));
-
-        clearBTN.setText("CLEAR");
-        clearBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBTNActionPerformed(evt);
-            }
-        });
-        jPanel5.add(clearBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 450, 130, 30));
-
-        filterCMBBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Product ID", "Lowest to Highest Price", "Highest to Lowest Price", "Lowest to Highest Stocks", "Highest to Lowest Stocks" }));
-        filterCMBBX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterCMBBXActionPerformed(evt);
-            }
-        });
-        jPanel5.add(filterCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 190, 30));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout warehousePanelLayout = new javax.swing.GroupLayout(warehousePanel);
+        warehousePanel.setLayout(warehousePanelLayout);
+        warehousePanelLayout.setHorizontalGroup(
+            warehousePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        warehousePanelLayout.setVerticalGroup(
+            warehousePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("              WAREHOUSE             ", jPanel4);
+        jTabbedPane1.addTab("WAREHOUSE", warehousePanel);
 
-        jPanel6.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        salesPanel.setBackground(new java.awt.Color(204, 204, 255));
+        salesPanel.setMinimumSize(new java.awt.Dimension(650, 353));
+        salesPanel.setPreferredSize(new java.awt.Dimension(650, 353));
+        salesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Quantity");
-        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, -1));
+        jLabel1.setText("Quantity:");
+        salesPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        salesPanel.add(quantitySpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 165, 50));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("User ID");
-        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
-        jPanel6.add(quantitySpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 270, 50));
-
-        productnameCMBBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ceremic Plates", "Silver Fork", "Glass Wine Goblet" }));
-        productnameCMBBX.addActionListener(new java.awt.event.ActionListener() {
+        productNameCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productnameCMBBXActionPerformed(evt);
+                productNameComboActionPerformed(evt);
             }
         });
-        jPanel6.add(productnameCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 270, 55));
+        salesPanel.add(productNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 165, 50));
 
+        addsaleBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addsaleBTN.setText("ADD SALE");
         addsaleBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addsaleBTNActionPerformed(evt);
             }
         });
-        jPanel6.add(addsaleBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, -1, -1));
-        jPanel6.add(useridTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 280, 40));
+        salesPanel.add(addsaleBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 140, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Product Name ");
-        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 84, -1, -1));
+        jLabel3.setText("Product Name: ");
+        salesPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        jTabbedPane1.addTab("          ADD SALES           ", jPanel6);
+        salesRecordTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Sales ID", "Product Name", "Quantity Sold", "Total Price", "Sale Date"
+            }
+        ));
+        jScrollPane2.setViewportView(salesRecordTable);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1171, Short.MAX_VALUE)
+        salesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 580, 460));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel9.setText("jLabel6");
+        salesPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
+
+        jTabbedPane1.addTab("MY SALES", salesPanel);
+
+        javax.swing.GroupLayout logoutPanelLayout = new javax.swing.GroupLayout(logoutPanel);
+        logoutPanel.setLayout(logoutPanelLayout);
+        logoutPanelLayout.setHorizontalGroup(
+            logoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+        logoutPanelLayout.setVerticalGroup(
+            logoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("        LOGOUT       ", jPanel7);
+        jTabbedPane1.addTab("LOGOUT", logoutPanel);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -341,6 +397,7 @@ public class MainUser extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
@@ -431,7 +488,7 @@ public class MainUser extends javax.swing.JFrame {
 
     private void addsaleBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addsaleBTNActionPerformed
         // Get the selected product name and quantity from the UI
-    String selectedProductName = (String) productnameCMBBX.getSelectedItem();
+    String selectedProductName = (String) productNameCombo.getSelectedItem();
     int quantitySold = (int) quantitySpinner.getValue();  // Get quantity from JSpinner
 
     if (selectedProductName == null || quantitySold <= 0) {
@@ -440,7 +497,7 @@ public class MainUser extends javax.swing.JFrame {
     }
 
     // Get the user ID from the text field
-    int userID = Integer.parseInt(useridTXT.getText());
+   // int userID = Integer.parseInt(useridTXT.getText());
 
     // Database connection
     Connection conn = DatabaseConnection.getInstance().getConnection();
@@ -487,6 +544,9 @@ public class MainUser extends javax.swing.JFrame {
             updatePs.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Sale added successfully! Stock updated.");
+            
+            // refresh table
+            salesRecordData();
 
             // Close statements
             insertPs.close();
@@ -503,10 +563,78 @@ public class MainUser extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_addsaleBTNActionPerformed
 
-    private void productnameCMBBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productnameCMBBXActionPerformed
+    private void productNameComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productNameComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_productnameCMBBXActionPerformed
+    }//GEN-LAST:event_productNameComboActionPerformed
 
+    private void loadUserData() {
+        if (userID == 0) {
+        // Handle the special case for admin when running MainUser directly
+            welcomeLBL.setText("WELCOME!");  // Admin-specific message
+            return;  // Skip the database query for the admin case
+         }
+        
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        if (conn != null) {
+            String query = "SELECT firstName FROM users WHERE userID = ?";
+            try {
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setInt(1, userID);  // Use userID to query the specific user
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    String firstName = rs.getString("firstName"); // Get the first name
+                    
+                    String upperCaseFirstName = firstName.toUpperCase();
+                    
+                    // Update the welcomeLBL with the first name
+                    welcomeLBL.setText("WELCOME, " + upperCaseFirstName + "!");
+                }
+                else {
+                welcomeLBL.setText("USER NOT FOUND");
+            }
+                
+                
+            } catch (SQLException ex) {
+                System.out.println("Error loading user data: " + ex.getMessage());
+            }
+        }
+    }
+    
+    private void loadUserTotalSales() {
+    if (userID == 0) {
+        // Skip the query if it's an admin (userID 0)
+        totalSalesLBL.setText("My Total Sales: ₱0.00");  
+        return;
+    }
+
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+    if (conn != null) {
+        String query = "SELECT SUM(totalPrice) AS totalSales FROM sales WHERE userID = ?"; 
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userID); // Use userID to filter sales
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                double totalSales = rs.getDouble("totalSales"); // Get total sales
+                NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH")); 
+                String formattedSales = currencyFormat.format(totalSales); // Format as PHP currency
+
+                totalSalesLBL.setText(formattedSales); // Display in label
+            } else {
+                totalSalesLBL.setText("My Total Sales: ₱0.00"); // Default if no sales
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error loading total sales: " + ex.getMessage());
+        }
+    }
+}
+
+    
     private void logout() {
         // Hide the current frame (MainAdmin or MainUser)
         this.setVisible(false);
@@ -534,17 +662,23 @@ public class MainUser extends javax.swing.JFrame {
             String sql = "SELECT * FROM products";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
 
             while (rs.next()) {
                 // Get data from ResultSet
                 String productID = rs.getString("productID");
                 String productName = rs.getString("productName");
                 String category = rs.getString("category");
-                String price = rs.getString("price");
+           //     String price = rs.getString("price");
                 String stockQuantity = rs.getString("stockQuantity");
+                
+                double price = rs.getDouble("price");
+                String formattedPrice = currencyFormat.format(price);
+                
 
                 // Add row to table
-                model.addRow(new Object[]{productID, productName, category, price, stockQuantity});
+                model.addRow(new Object[]{productID, productName, category, formattedPrice, stockQuantity});
             }
 
             ps.close();
@@ -554,54 +688,396 @@ public class MainUser extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    
     private void sortProductsTable(String sortOption) {
+        
+        
         Connection conn = DatabaseConnection.getInstance().getConnection();
         DefaultTableModel model = (DefaultTableModel) productstable.getModel();
 
         // Clear existing table data
         model.setRowCount(0);
 
-        String sql = "";
+        String sql = "SELECT * FROM products"; // Default query
+
         switch (sortOption) {
             case "Lowest to Highest Price":
-                sql = "SELECT * FROM products ORDER BY price ASC";
+                sql += " ORDER BY price ASC";
                 break;
             case "Highest to Lowest Price":
-                sql = "SELECT * FROM products ORDER BY price DESC";
+                sql += " ORDER BY price DESC";
                 break;
             case "Lowest to Highest Stocks":
-                sql = "SELECT * FROM products ORDER BY stockQuantity ASC";
+                sql += " ORDER BY stockQuantity ASC";
                 break;
             case "Highest to Lowest Stocks":
-                sql = "SELECT * FROM products ORDER BY stockQuantity DESC";
+                sql += " ORDER BY stockQuantity DESC";
                 break;
             case "Product ID":
-                sql = "SELECT * FROM products ORDER BY productID ASC";
+                sql += " ORDER BY CAST(productID AS UNSIGNED) ASC"; // Corrected numeric sorting
                 break;
+            case "Sort A-Z (Product Name)":
+                sql += " ORDER BY productName ASC";
+                break;
+            case "Sort Z-A (Product Name)":
+                sql += " ORDER BY productName DESC";
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Invalid sort option!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
         }
 
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
 
             while (rs.next()) {
                 String productID = rs.getString("productID");
                 String productName = rs.getString("productName");
                 String category = rs.getString("category");
-                String price = rs.getString("price");
+               // String price = rs.getString("price");
                 String stockQuantity = rs.getString("stockQuantity");
+                
+                double priceValue = Double.parseDouble(rs.getString("price"));  // Convert string to double
+            String formattedPrice = currencyFormat.format(priceValue); // Format with ₱ and commas
+
 
                 // Add row to table
-                model.addRow(new Object[]{productID, productName, category, price, stockQuantity});
+                model.addRow(new Object[]{productID, productName, category, formattedPrice, stockQuantity});
             }
-
-            ps.close();
-            rs.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error Loading Data!");
+            JOptionPane.showMessageDialog(null, "Error Loading Data!", "Database Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
+    
+    public void salesRecordData() {
+    // Database connection
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        // Create a DefaultTableModel to display the data in JTable
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.setRowCount(0);
+
+        // SQL query to fetch the sales data
+      /*  String sql = "SELECT s.salesID, CONCAT(u.firstName, ' ', u.lastName) AS salesPerson, "
+                   + "p.productName, s.quantitySold, s.totalPrice AS sales, s.saleDate "
+                   + "FROM sales s "
+                   + "JOIN users u ON s.userID = u.userID "
+                   + "JOIN products p ON s.productID = p.productID "
+                   + "ORDER BY s.salesID ASC";       */ // Sort by salesID in ascending order
+                   
+          String sql = "SELECT s.salesID, CONCAT(u.firstName, ' ', u.lastName) AS salesPerson, "
+                    + "p.productName, s.quantitySold, s.totalPrice AS sales, s.saleDate "
+                    + "FROM sales s "
+                    + "JOIN users u ON s.userID = u.userID "
+                    + "JOIN products p ON s.productID = p.productID "
+                    + "WHERE s.userID = ? "
+                    + "ORDER BY s.salesID ASC"; // Sort by salesID in ascending order
+
+
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID); // Use the stored userID
+            ResultSet rs = ps.executeQuery();
+
+            
+
+            // Adding column headers to the table model
+            tableModel.addColumn("Sales ID");
+        //    tableModel.addColumn("Sales Person");
+            tableModel.addColumn("Product Name");
+            tableModel.addColumn("Quantity Sold");
+            tableModel.addColumn("Sales");
+            tableModel.addColumn("Sale Date");
+
+            
+          
+            // Currency formatter for Philippine Peso
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
+
+            // Adding fetched data into the table model
+            while (rs.next()) {
+                int salesID = rs.getInt("salesID");
+           //     String salesPerson = rs.getString("salesPerson");
+                String productName = rs.getString("productName");
+                int quantitySold = rs.getInt("quantitySold");
+                double sales = rs.getDouble("sales");
+                java.sql.Date saleDate = rs.getDate("saleDate");
+                
+                // Format sales amount
+                String formattedSales = currencyFormat.format(sales);
+
+                // Add the row to the JTable
+                tableModel.addRow(new Object[]{salesID, productName, quantitySold, formattedSales, saleDate});
+
+            }
+
+            // Set the JTable model to display the data
+            salesRecordTable.setModel(tableModel);
+            
+            // Close the resources
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error retrieving sales data!");
+            e.printStackTrace();
+        }
+    }
+    
+    private void loadProductNamesWithStock() {
+        String query = "SELECT productName FROM products WHERE stockQuantity > 0"; // SQL to get product names with stock
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String productName = rs.getString("productName");
+                productNameCombo.addItem(productName);  // Add product name to ComboBox
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load product names with stock.");
+        }
+    }
+    
+    public void loadProductNames(JComboBox<String> productNameCombo) {
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+    
+    if (conn == null) {
+        System.out.println("Database connection is null.");
+        return;
+    }
+
+    String query = "SELECT productName FROM products";
+    
+    try (PreparedStatement pst = conn.prepareStatement(query);
+         ResultSet rs = pst.executeQuery()) {
+        
+        productNameCombo.removeAllItems(); // Clear existing items
+        
+        while (rs.next()) {
+            productNameCombo.addItem(rs.getString("productName"));
+        }
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+    
+    private void loadUserTotalProductsSold() {
+    if (userID == 0) {
+        // Skip the query if it's an admin (userID 0)
+        totalProductsLBL.setText("Total Products Sold: 0");  
+        return;
+    }
+
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+    if (conn != null) {
+        String query = "SELECT SUM(quantitySold) AS totalProducts FROM sales WHERE userID = ?"; 
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userID); // Use userID to filter sales
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int totalProducts = rs.getInt("totalProducts"); // Get total quantity
+                totalProductsLBL.setText("" + totalProducts + " items"); // Display in label
+            } else {
+                totalProductsLBL.setText("Total Products Sold: 0"); // Default if no sales
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error loading total products sold: " + ex.getMessage());
+        }
+    }
+}
+    private void loadMostSoldProduct() {
+    if (userID == 0) {
+        // Skip the query if it's an admin (userID 0)
+        mostSoldProductLBL.setText("Most Sold Product: None");  
+        return;
+    }
+
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+    if (conn != null) {
+        String query = "SELECT p.productName, SUM(s.quantitySold) AS totalQuantity "
+                     + "FROM sales s "
+                     + "JOIN products p ON s.productID = p.productID "
+                     + "WHERE s.userID = ? "
+                     + "GROUP BY p.productName "
+                     + "ORDER BY totalQuantity DESC LIMIT 1"; // Get the most sold product
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userID); // Use userID to filter sales
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String productName = rs.getString("productName"); // Get the product name
+                int totalQuantity = rs.getInt("totalQuantity"); // Get total quantity sold
+                
+                mostSoldProductLBL.setText(productName + " (" + totalQuantity + ")");
+            } else {
+                mostSoldProductLBL.setText("Most Sold Product: None"); // Default if no sales
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error loading most sold product: " + ex.getMessage());
+        }
+    }
+}
+    
+    private void loadBestSellingCategory() {
+    if (userID == 0) {
+        // Handle the special case for admin when running MainUser directly
+        return;  // Skip the database query for the admin case
+    }
+
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+    if (conn != null) {
+        String query = "SELECT p.category, SUM(s.quantitySold) AS totalQuantity "
+                     + "FROM sales s "
+                     + "JOIN products p ON s.productID = p.productID "
+                     + "WHERE s.userID = ? "
+                     + "GROUP BY p.category "
+                     + "ORDER BY totalQuantity DESC LIMIT 1";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);  // Use userID to query the specific user
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                String bestSellingCategory = rs.getString("category");
+                // Display the best-selling category
+                bestSellingCategoryLBL.setText(bestSellingCategory);
+            } else {
+                bestSellingCategoryLBL.setText("No sales data available");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error loading best-selling category: " + ex.getMessage());
+        }
+    }
+}
+    
+private void displaySalesBarChart() {
+    // Create the dataset
+    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+    // Database connection and query to fetch total sales by product
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+    if (conn != null) {
+        String query = "SELECT p.productName, SUM(s.totalPrice) AS totalSales " +
+                       "FROM sales s " +
+                       "JOIN products p ON s.productID = p.productID " +
+                       "WHERE s.userID = ? " +
+                       "GROUP BY p.productName";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID); // Make sure userID is set properly
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String productName = rs.getString("productName");
+                double totalSales = rs.getDouble("totalSales");
+                dataset.addValue(totalSales, "Sales", productName);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching sales data: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Create the bar chart using JFreeChart
+    JFreeChart chart = ChartFactory.createBarChart(
+            "Total Sales by Product", // Chart title
+            "Product",                // X-axis label
+            "Total Sales",            // Y-axis label
+            dataset                   // Dataset
+    );
+
+    // Create a ChartPanel to display the chart
+    ChartPanel chartPanel = new ChartPanel(chart);
+    chartPanel.setPreferredSize(new java.awt.Dimension(460, 260)); // Set preferred size
+
+    // Create a JPanel to hold the chart panel, and set its bounds
+    JPanel chartPanelContainer = new JPanel();
+    chartPanelContainer.setLayout(new BorderLayout());
+    chartPanelContainer.setBounds(516, 292, 460, 260);  // Set the bounds (location and size)
+    chartPanelContainer.add(chartPanel, BorderLayout.CENTER); // Add chart to the panel
+
+    // Add the chartPanelContainer to the current frame's content pane
+    jLabel10.setLayout(null); // Make sure layout is set to null for absolute positioning
+    jLabel10.add(chartPanelContainer);  // Add the panel with the chart
+    revalidate();  // Revalidate the frame to apply changes
+    repaint();     // Repaint to update the display
+}
+
+    private void displaySalesPieChart() {
+    // Create the dataset
+    DefaultPieDataset dataset = new DefaultPieDataset();
+
+    // Database connection and query to fetch total sales by product
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+    if (conn != null) {
+        String query = "SELECT p.productName, SUM(s.totalPrice) AS totalSales " +
+                       "FROM sales s " +
+                       "JOIN products p ON s.productID = p.productID " +
+                       "WHERE s.userID = ? " +
+                       "GROUP BY p.productName";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID); // Make sure userID is set properly
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String productName = rs.getString("productName");
+                double totalSales = rs.getDouble("totalSales");
+                dataset.setValue(productName, totalSales);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching sales data: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Create the Pie Chart using JFreeChart
+    JFreeChart chart = ChartFactory.createPieChart(
+            "My Total Sales by Product",  // Chart title
+            dataset,                   // Dataset
+            true,                      // Include legend
+            true,                      // Use tooltips
+            false                      // URLs disabled
+    );
+
+    // Create a ChartPanel to display the chart
+    ChartPanel chartPanel = new ChartPanel(chart);
+    chartPanel.setPreferredSize(new java.awt.Dimension(460, 260)); // Set preferred size
+
+    // Create a JPanel to hold the chart panel, and set its bounds
+    JPanel chartPanelContainer = new JPanel();
+    chartPanelContainer.setLayout(new BorderLayout());
+    chartPanelContainer.setBounds(18, 11, 460, 260);  // Set the bounds (location and size)
+    chartPanelContainer.add(chartPanel, BorderLayout.CENTER); // Add chart to the panel
+
+    // Add the chartPanelContainer to the current frame's content pane
+    jPanel2.setLayout(null); // Make sure layout is set to null for absolute positioning
+    jPanel2.add(chartPanelContainer);  // Add the panel with the chart
+    revalidate();  // Revalidate the frame to apply changes
+    repaint();     // Repaint to update the display
+}
+    
+
+
+
+    
     // Ensure the user exists in the users table
     private boolean isUserExists(int userID) {
         String sql = "SELECT COUNT(*) FROM users WHERE userID = ?";
@@ -658,44 +1134,49 @@ public class MainUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addsaleBTN;
+    private javax.swing.JLabel bestSellingCategoryLBL;
     private javax.swing.JLabel categoryLBL;
     private javax.swing.JTextField categoryTXT;
     private javax.swing.JButton clearBTN;
     private javax.swing.JComboBox<String> filterCMBBX;
+    private javax.swing.JPanel homePanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel label1;
+    private javax.swing.JLabel label2;
+    private javax.swing.JLabel label3;
+    private javax.swing.JLabel label4;
+    private javax.swing.JPanel logoutPanel;
+    private javax.swing.JLabel mostSoldProductLBL;
     private javax.swing.JLabel priceLBL;
     private javax.swing.JTextField priceTXT;
+    private javax.swing.JComboBox<String> productNameCombo;
     private javax.swing.JLabel productidLBL;
     private javax.swing.JTextField productidTXT;
-    private javax.swing.JComboBox<String> productnameCMBBX;
     private javax.swing.JLabel productnameLBL;
     private javax.swing.JTextField productnameTXT;
     private javax.swing.JTable productstable;
     private javax.swing.JSpinner quantitySpinner;
+    private javax.swing.JPanel salesPanel;
+    private javax.swing.JTable salesRecordTable;
     private javax.swing.JButton searchBTN;
     private javax.swing.JTextField searchTXT;
     private javax.swing.JLabel stocksLBL;
     private javax.swing.JTextField stocksTXT;
-    private javax.swing.JTextField useridTXT;
+    private javax.swing.JLabel totalProductsLBL;
+    private javax.swing.JLabel totalSalesLBL;
+    private javax.swing.JPanel warehousePanel;
+    private javax.swing.JLabel welcomeLBL;
     // End of variables declaration//GEN-END:variables
 }
