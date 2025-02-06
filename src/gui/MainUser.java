@@ -136,47 +136,47 @@ public class MainUser extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        homePanel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 500, 284));
+        homePanel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 500, 245));
 
         welcomeLBL.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         welcomeLBL.setText("WELCOME! ");
-        homePanel.add(welcomeLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 470, -1));
+        homePanel.add(welcomeLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 470, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(null);
-        homePanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 284, 500, 330));
+        homePanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 245, 500, 370));
 
         bestSellingCategoryLBL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         bestSellingCategoryLBL.setText("Best Category");
-        homePanel.add(bestSellingCategoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, 230, 40));
+        homePanel.add(bestSellingCategoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 440, 230, 40));
 
         mostSoldProductLBL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         mostSoldProductLBL.setText("Product");
-        homePanel.add(mostSoldProductLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 410, 250, 40));
+        homePanel.add(mostSoldProductLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 390, 260, 40));
 
         totalProductsLBL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         totalProductsLBL.setText("Total Products");
-        homePanel.add(totalProductsLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 360, 240, 40));
+        homePanel.add(totalProductsLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 240, 40));
 
         totalSalesLBL.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         totalSalesLBL.setText("Sales");
-        homePanel.add(totalSalesLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 300, 40));
+        homePanel.add(totalSalesLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, 300, 40));
 
         label1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         label1.setText("My Total Sales: ");
-        homePanel.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 220, 40));
+        homePanel.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 220, 40));
 
         label2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         label2.setText("Total Products Sold: ");
-        homePanel.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 240, 40));
+        homePanel.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 240, 40));
 
         label3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         label3.setText("Most Sold Product:");
-        homePanel.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 230, 40));
+        homePanel.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 230, 40));
 
         label4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         label4.setText("Best Selling Category:");
-        homePanel.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 260, 40));
+        homePanel.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 440, 260, 40));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
         jLabel10.setText("jLabel6");
@@ -1059,19 +1059,19 @@ private void displaySalesBarChart() {
 
     // Create a ChartPanel to display the chart
     ChartPanel chartPanel = new ChartPanel(chart);
-    chartPanel.setPreferredSize(new java.awt.Dimension(460, 260)); // Set preferred size
+    chartPanel.setPreferredSize(new java.awt.Dimension(460, 295)); // Set preferred size
 
     // Create a JPanel to hold the chart panel, and set its bounds
     JPanel chartPanelContainer = new JPanel();
     chartPanelContainer.setLayout(new BorderLayout());
-    chartPanelContainer.setBounds(18, 11, 460, 260);  // Set the bounds (location and size)
+    chartPanelContainer.setBounds(18, 11, 460, 295);  // Set the bounds (location and size)
     chartPanelContainer.add(chartPanel, BorderLayout.CENTER); // Add chart to the panel
 
     // Add the chartPanelContainer to the current frame's content pane
     jPanel2.setLayout(null); // Make sure layout is set to null for absolute positioning
     jPanel2.add(chartPanelContainer);  // Add the panel with the chart
     revalidate();  // Revalidate the frame to apply changes
-    repaint();     // Repaint to update the display
+    repaint();     // Repaint to update the displayedge
 }
     
 
