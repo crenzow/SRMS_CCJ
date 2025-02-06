@@ -219,7 +219,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 deleteBTNActionPerformed(evt);
             }
         });
-        salesPanel.add(deleteBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 490, 140, 40));
+        salesPanel.add(deleteBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 480, 140, 40));
 
         addBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addBTN.setText("ADD");
@@ -228,7 +228,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 addBTNActionPerformed(evt);
             }
         });
-        salesPanel.add(addBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 370, 140, 40));
+        salesPanel.add(addBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 360, 140, 40));
 
         updateBTN1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateBTN1.setText("UPDATE");
@@ -237,7 +237,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 updateBTN1ActionPerformed(evt);
             }
         });
-        salesPanel.add(updateBTN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 430, 140, 40));
+        salesPanel.add(updateBTN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 420, 140, 40));
 
         refreshBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-arrow.png"))); // NOI18N
         refreshBTN.addActionListener(new java.awt.event.ActionListener() {
