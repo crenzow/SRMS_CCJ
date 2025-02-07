@@ -826,8 +826,8 @@ public class MainUser extends javax.swing.JFrame {
         }
     }
     
-    private void loadProductNamesWithStock() {
-        String query = "SELECT productName FROM products WHERE stockQuantity > 0"; // SQL to get product names with stock
+    private void loadProductNames() {
+        String query = "SELECT productName FROM products"; // SQL to get product names with stock
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
@@ -965,59 +965,6 @@ public class MainUser extends javax.swing.JFrame {
     }
 }
     
-private void displaySalesBarChart() {
-    // Create the dataset
-    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-    // Database connection and query to fetch total sales by product
-    Connection conn = DatabaseConnection.getInstance().getConnection();
-    if (conn != null) {
-        String query = "SELECT p.productName, SUM(s.totalPrice) AS totalSales " +
-                       "FROM sales s " +
-                       "JOIN products p ON s.productID = p.productID " +
-                       "WHERE s.userID = ? " +
-                       "GROUP BY p.productName";
-
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, userID); // Make sure userID is set properly
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                String productName = rs.getString("productName");
-                double totalSales = rs.getDouble("totalSales");
-                dataset.addValue(totalSales, "Sales", productName);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error fetching sales data: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    // Create the bar chart using JFreeChart
-    JFreeChart chart = ChartFactory.createBarChart(
-            "Total Sales by Product", // Chart title
-            "Product",                // X-axis label
-            "Total Sales",            // Y-axis label
-            dataset                   // Dataset
-    );
-
-    // Create a ChartPanel to display the chart
-    ChartPanel chartPanel = new ChartPanel(chart);
-    chartPanel.setPreferredSize(new java.awt.Dimension(460, 260)); // Set preferred size
-
-    // Create a JPanel to hold the chart panel, and set its bounds
-    JPanel chartPanelContainer = new JPanel();
-    chartPanelContainer.setLayout(new BorderLayout());
-    chartPanelContainer.setBounds(516, 292, 460, 260);  // Set the bounds (location and size)
-    chartPanelContainer.add(chartPanel, BorderLayout.CENTER); // Add chart to the panel
-
-    // Add the chartPanelContainer to the current frame's content pane
-    jLabel10.setLayout(null); // Make sure layout is set to null for absolute positioning
-    jLabel10.add(chartPanelContainer);  // Add the panel with the chart
-    revalidate();  // Revalidate the frame to apply changes
-    repaint();     // Repaint to update the display
-}
 
     private void displaySalesPieChart() {
     // Create the dataset

@@ -27,6 +27,7 @@ public class MainAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         label1 = new java.awt.Label();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         homePanel = new javax.swing.JPanel();
@@ -50,7 +51,23 @@ public class MainAdmin extends javax.swing.JFrame {
         addBTN = new javax.swing.JButton();
         updateBTN1 = new javax.swing.JButton();
         refreshBTN = new javax.swing.JButton();
+        srsearchTXT = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        updateBTN2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        srsalesIDTXT = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        srsalespersonTXT = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        srproductnameTXT = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        srquantityTXT = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        srsalesTXT = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        srdateTXT = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         analyticsPanel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         warehousePanel = new javax.swing.JPanel();
@@ -99,6 +116,8 @@ public class MainAdmin extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
 
         label1.setText("label1");
+
+        jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 650));
@@ -184,7 +203,7 @@ public class MainAdmin extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(salesrecordTBL);
 
-        salesPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 89, 750, 437));
+        salesPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 640, 437));
 
         filterBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         filterBTN.setText("FILTER");
@@ -193,24 +212,24 @@ public class MainAdmin extends javax.swing.JFrame {
                 filterBTNActionPerformed(evt);
             }
         });
-        salesPanel.add(filterBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 80, 45));
+        salesPanel.add(filterBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 45));
 
         totalsalesTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 totalsalesTXTActionPerformed(evt);
             }
         });
-        salesPanel.add(totalsalesTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 110, 45));
-        salesPanel.add(startDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 158, 45));
-        salesPanel.add(endDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 149, 45));
+        salesPanel.add(totalsalesTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, 110, 45));
+        salesPanel.add(startDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 158, 45));
+        salesPanel.add(endDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 149, 45));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("FROM:");
-        salesPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 50, 47));
+        salesPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 50, 47));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("TO:");
-        salesPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 30, 47));
+        salesPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 30, 47));
 
         deleteBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         deleteBTN.setText("DELETE");
@@ -219,7 +238,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 deleteBTNActionPerformed(evt);
             }
         });
-        salesPanel.add(deleteBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 480, 140, 40));
+        salesPanel.add(deleteBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 110, 40));
 
         addBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addBTN.setText("ADD");
@@ -228,7 +247,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 addBTNActionPerformed(evt);
             }
         });
-        salesPanel.add(addBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 360, 140, 40));
+        salesPanel.add(addBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 400, 110, 40));
 
         updateBTN1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateBTN1.setText("UPDATE");
@@ -237,7 +256,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 updateBTN1ActionPerformed(evt);
             }
         });
-        salesPanel.add(updateBTN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 420, 140, 40));
+        salesPanel.add(updateBTN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 400, 110, 40));
 
         refreshBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-arrow.png"))); // NOI18N
         refreshBTN.addActionListener(new java.awt.event.ActionListener() {
@@ -245,11 +264,93 @@ public class MainAdmin extends javax.swing.JFrame {
                 refreshBTNActionPerformed(evt);
             }
         });
-        salesPanel.add(refreshBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 60, 45));
+        salesPanel.add(refreshBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 60, 45));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
-        jLabel7.setText("jLabel6");
-        salesPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
+        srsearchTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srsearchTXTActionPerformed(evt);
+            }
+        });
+        salesPanel.add(srsearchTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 170, 40));
+
+        jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        salesPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 30, -1, 40));
+
+        updateBTN2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        updateBTN2.setText("CLEAR");
+        updateBTN2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBTN2ActionPerformed(evt);
+            }
+        });
+        salesPanel.add(updateBTN2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 470, 110, 40));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Sales ID:");
+        salesPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, -1, -1));
+
+        srsalesIDTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srsalesIDTXTActionPerformed(evt);
+            }
+        });
+        salesPanel.add(srsalesIDTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 90, 110, 30));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText("Sales Person:");
+        salesPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
+        salesPanel.add(srsalespersonTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 140, 110, 30));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setText("Product Name:");
+        salesPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 190, -1, -1));
+
+        srproductnameTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srproductnameTXTActionPerformed(evt);
+            }
+        });
+        salesPanel.add(srproductnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 190, 110, 30));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setText("Quantity Sold:");
+        salesPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 240, -1, -1));
+
+        srquantityTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srquantityTXTActionPerformed(evt);
+            }
+        });
+        salesPanel.add(srquantityTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 240, 110, 30));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setText("Sales:");
+        salesPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, -1, -1));
+        salesPanel.add(srsalesTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 290, 110, 30));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setText("Total Sales:");
+        salesPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 520, -1, -1));
+
+        srdateTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srdateTXTActionPerformed(evt);
+            }
+        });
+        salesPanel.add(srdateTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 340, 110, 30));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setText("Date:");
+        salesPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 340, -1, -1));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
+        jLabel17.setText("jLabel6");
+        salesPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
 
         jTabbedPane1.addTab("SALES RECORD", salesPanel);
 
@@ -1101,7 +1202,7 @@ public class MainAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_fnameTXTActionPerformed
 
     private void deleteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBTNActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_deleteBTNActionPerformed
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
@@ -1109,7 +1210,7 @@ public class MainAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_addBTNActionPerformed
 
     private void updateBTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBTN1ActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_updateBTN1ActionPerformed
 
     private void refreshBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBTNActionPerformed
@@ -1121,6 +1222,68 @@ public class MainAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         loadProductsTable();
     }//GEN-LAST:event_refreshProductsActionPerformed
+
+    private void srsearchTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srsearchTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srsearchTXTActionPerformed
+
+    private void updateBTN2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBTN2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBTN2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    String searchQuery = srsearchTXT.getText().trim();
+
+    if (searchQuery.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Enter Sales ID or Product ID!", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    String sql = "SELECT s.salesID, s.quantitySold, s.saleDate, s.totalPrice, u.firstName, p.productName " +
+                 "FROM sales s " +
+                 "JOIN users u ON s.userID = u.userID " +
+                 "JOIN products p ON s.productID = p.productID " +
+                 "WHERE s.salesID = ? OR s.productID = ?";
+
+    try (Connection conn = DatabaseConnection.getInstance().getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, searchQuery);
+        ps.setString(2, searchQuery);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                srsalesIDTXT.setText(rs.getString("salesID"));
+                srsalespersonTXT.setText(rs.getString("firstName")); // Salesperson's first name
+                srproductnameTXT.setText(rs.getString("productName"));
+                srquantityTXT.setText(rs.getString("quantitySold"));
+                srsalesTXT.setText(rs.getString("totalPrice"));
+                srdateTXT.setText(rs.getString("saleDate"));
+            } else {
+                JOptionPane.showMessageDialog(null, "Sales Record Not Found!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error Retrieving Data!", "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void srsalesIDTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srsalesIDTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srsalesIDTXTActionPerformed
+
+    private void srquantityTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srquantityTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srquantityTXTActionPerformed
+
+    private void srdateTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srdateTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srdateTXTActionPerformed
+
+    private void srproductnameTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srproductnameTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srproductnameTXTActionPerformed
 
     private void logout() {
         // Hide the current frame (MainAdmin or MainUser)
@@ -1410,14 +1573,23 @@ public class MainAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel fnameLBL;
     private javax.swing.JTextField fnameTXT;
     private javax.swing.JPanel homePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1452,11 +1624,19 @@ public class MainAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField searchTXT;
     private javax.swing.JButton searchuserBTN;
     private javax.swing.JTextField searchuserTXT;
+    private javax.swing.JTextField srdateTXT;
+    private javax.swing.JTextField srproductnameTXT;
+    private javax.swing.JTextField srquantityTXT;
+    private javax.swing.JTextField srsalesIDTXT;
+    private javax.swing.JTextField srsalesTXT;
+    private javax.swing.JTextField srsalespersonTXT;
+    private javax.swing.JTextField srsearchTXT;
     private com.toedter.calendar.JDateChooser startDateChooser;
     private javax.swing.JLabel stocksLBL;
     private javax.swing.JTextField stocksTXT;
     private javax.swing.JTextField totalsalesTXT;
     private javax.swing.JButton updateBTN1;
+    private javax.swing.JButton updateBTN2;
     private javax.swing.JButton updateproductBTN;
     private javax.swing.JButton updateuserBTN;
     private javax.swing.JTable userTBL;
