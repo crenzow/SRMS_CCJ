@@ -101,7 +101,6 @@ public class MainUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 650));
-        setPreferredSize(new java.awt.Dimension(1000, 650));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -249,7 +248,7 @@ public class MainUser extends javax.swing.JFrame {
 
         stocksLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         stocksLBL.setText("Stocks:");
-        jPanel5.add(stocksLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 60, 30));
+        jPanel5.add(stocksLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 70, 30));
 
         stocksTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
