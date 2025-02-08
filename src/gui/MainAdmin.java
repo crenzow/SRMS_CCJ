@@ -15,6 +15,8 @@ public class MainAdmin extends javax.swing.JFrame {
         fetchSalesData();
         salesRecordData();
         setLocationRelativeTo(null);
+        retrieveTotalSales();
+        checkLowStock();
     }
 
     /**
@@ -71,6 +73,8 @@ public class MainAdmin extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         analyticsPanel = new javax.swing.JPanel();
+        total_sale_product = new javax.swing.JLabel();
+        lowStockLBL = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         warehousePanel = new javax.swing.JPanel();
         stocksTXT = new javax.swing.JTextField();
@@ -125,7 +129,6 @@ public class MainAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 650));
-        setPreferredSize(new java.awt.Dimension(1000, 650));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -223,7 +226,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 totalsalesTXTActionPerformed(evt);
             }
         });
-        salesPanel.add(totalsalesTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, 110, 45));
+        salesPanel.add(totalsalesTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 520, 200, 45));
         salesPanel.add(startDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 158, 45));
         salesPanel.add(endDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 149, 45));
 
@@ -339,7 +342,7 @@ public class MainAdmin extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setText("Total Sales:");
-        salesPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, -1, -1));
+        salesPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, -1, -1));
 
         srdateTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,7 +361,7 @@ public class MainAdmin extends javax.swing.JFrame {
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel19.setText("YYYY-MM-DD");
-        salesPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 370, -1, -1));
+        salesPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 370, -1, -1));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
         jLabel17.setText("jLabel6");
@@ -368,6 +371,14 @@ public class MainAdmin extends javax.swing.JFrame {
 
         analyticsPanel.setBackground(new java.awt.Color(204, 204, 255));
         analyticsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        total_sale_product.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        total_sale_product.setText("TOTAL SALES");
+        analyticsPanel.add(total_sale_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 400, 50));
+
+        lowStockLBL.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lowStockLBL.setText("LOW STOCK");
+        analyticsPanel.add(lowStockLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 480, 50));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
         jLabel10.setText("jLabel6");
@@ -383,7 +394,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 stocksTXTActionPerformed(evt);
             }
         });
-        warehousePanel.add(stocksTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 340, 140, 40));
+        warehousePanel.add(stocksTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 340, 160, 40));
 
         searchTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -397,28 +408,28 @@ public class MainAdmin extends javax.swing.JFrame {
                 productidTXTActionPerformed(evt);
             }
         });
-        warehousePanel.add(productidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, 140, 40));
+        warehousePanel.add(productidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 160, 40));
 
         productnameTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 productnameTXTActionPerformed(evt);
             }
         });
-        warehousePanel.add(productnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, 140, 40));
+        warehousePanel.add(productnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 160, 40));
 
         categoryTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoryTXTActionPerformed(evt);
             }
         });
-        warehousePanel.add(categoryTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 140, 40));
+        warehousePanel.add(categoryTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 220, 160, 40));
 
         priceTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceTXTActionPerformed(evt);
             }
         });
-        warehousePanel.add(priceTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 280, 140, 40));
+        warehousePanel.add(priceTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 280, 160, 40));
 
         searchBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         searchBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
@@ -431,23 +442,23 @@ public class MainAdmin extends javax.swing.JFrame {
 
         productnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         productnameLBL.setText("Product Name:");
-        warehousePanel.add(productnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 140, 40));
+        warehousePanel.add(productnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 140, 40));
 
         stocksLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         stocksLBL.setText("Stocks:");
-        warehousePanel.add(stocksLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 340, 70, 40));
+        warehousePanel.add(stocksLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, 70, 40));
 
         productidLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         productidLBL.setText("Product ID:");
-        warehousePanel.add(productidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 120, 40));
+        warehousePanel.add(productidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 120, 40));
 
         categoryLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         categoryLBL.setText("Category:");
-        warehousePanel.add(categoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 220, 90, 30));
+        warehousePanel.add(categoryLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 90, 40));
 
         priceLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         priceLBL.setText("Price:");
-        warehousePanel.add(priceLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 90, 40));
+        warehousePanel.add(priceLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 280, 90, 40));
 
         deleteproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         deleteproductBTN.setText("DELETE");
@@ -456,7 +467,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 deleteproductBTNActionPerformed(evt);
             }
         });
-        warehousePanel.add(deleteproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 450, 140, 40));
+        warehousePanel.add(deleteproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 490, 140, 40));
 
         updateproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateproductBTN.setText("UPDATE");
@@ -465,7 +476,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 updateproductBTNActionPerformed(evt);
             }
         });
-        warehousePanel.add(updateproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 400, 140, 40));
+        warehousePanel.add(updateproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 430, 140, 40));
 
         addproductBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addproductBTN.setText("ADD");
@@ -474,7 +485,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 addproductBTNActionPerformed(evt);
             }
         });
-        warehousePanel.add(addproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 400, 140, 40));
+        warehousePanel.add(addproductBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 430, 140, 40));
 
         filterCMBBX.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         filterCMBBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Product ID", "Lowest to Highest Price", "Highest to Lowest Price", "Lowest to Highest Stocks", "Highest to Lowest Stocks", "Sort A-Z (Product Name)", "Sort Z-A (Product Name)" }));
@@ -492,7 +503,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 clearBTNActionPerformed(evt);
             }
         });
-        warehousePanel.add(clearBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 450, 140, 40));
+        warehousePanel.add(clearBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 490, 140, 40));
 
         jScrollPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
@@ -518,7 +529,7 @@ public class MainAdmin extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel20.setText("Enter Product ID:");
-        warehousePanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, -1, -1));
+        warehousePanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 35, -1, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/wp3716612-periwinkle-wallpapers.jpg"))); // NOI18N
         jLabel6.setText("jLabel6");
@@ -542,38 +553,38 @@ public class MainAdmin extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(userTBL);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 485, 270));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 485, 450));
 
         passwordLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         passwordLBL.setText("Password:");
-        jPanel1.add(passwordLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, -1, -1));
-        jPanel1.add(salespersonidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 140, 30));
-        jPanel1.add(passwordTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 140, 30));
+        jPanel1.add(passwordLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
+        jPanel1.add(salespersonidTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 200, 40));
+        jPanel1.add(passwordTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 200, 40));
 
         salespersonidLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         salespersonidLBL.setText("Salesperson's ID:");
-        jPanel1.add(salespersonidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, 30));
+        jPanel1.add(salespersonidLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 40));
 
         fnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         fnameLBL.setText("First Name:");
-        jPanel1.add(fnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        jPanel1.add(fnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, 40));
 
         fnameTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fnameTXTActionPerformed(evt);
             }
         });
-        jPanel1.add(fnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 140, 30));
+        jPanel1.add(fnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 200, 40));
 
         lnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lnameLBL.setText("Last Name:");
-        jPanel1.add(lnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, 30));
-        jPanel1.add(lnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 140, 30));
+        jPanel1.add(lnameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, 40));
+        jPanel1.add(lnameTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 200, 40));
 
         emailLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         emailLBL.setText("Email:");
-        jPanel1.add(emailLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
-        jPanel1.add(emailTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 140, 30));
+        jPanel1.add(emailLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, 40));
+        jPanel1.add(emailTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 200, 40));
 
         adduserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         adduserBTN.setText("ADD");
@@ -582,7 +593,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 adduserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(adduserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 140, 30));
+        jPanel1.add(adduserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 140, 40));
 
         updateuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateuserBTN.setText("UPDATE");
@@ -591,7 +602,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 updateuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(updateuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 140, 30));
+        jPanel1.add(updateuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 140, 40));
 
         deleteuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         deleteuserBTN.setText("DELETE");
@@ -600,7 +611,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 deleteuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(deleteuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 140, 30));
+        jPanel1.add(deleteuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, 140, 40));
 
         searchuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         searchuserBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
@@ -609,8 +620,8 @@ public class MainAdmin extends javax.swing.JFrame {
                 searchuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(searchuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, 40));
-        jPanel1.add(searchuserTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 90, 40));
+        jPanel1.add(searchuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, 40));
+        jPanel1.add(searchuserTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 120, 40));
 
         clearuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         clearuserBTN.setText("CLEAR");
@@ -619,7 +630,7 @@ public class MainAdmin extends javax.swing.JFrame {
                 clearuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(clearuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 140, 30));
+        jPanel1.add(clearuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, 140, 40));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel21.setText("Enter Salesperson's ID:");
@@ -1746,7 +1757,77 @@ private String getProductIDByName(String productName, Connection conn) throws SQ
         }
     }
     
-   
+   public void retrieveTotalSales() {
+    // Database connection
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+
+    // SQL query to calculate the total sales
+    String sql = "SELECT SUM(totalPrice) AS totalSales FROM sales";
+
+    try {
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        double totalSales = 0; // Default to 0 if no sales data
+
+        // Fetch the total sales value
+        if (rs.next()) {
+            totalSales = rs.getDouble("totalSales");
+        }
+
+        // Format the total sales as PHP currency
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "PH"));
+        String formattedTotalSales = currencyFormat.format(totalSales);
+
+        // Update the JLabel with the total sales value
+        total_sale_product.setText("Total Sales: " + formattedTotalSales);
+
+        // Close the resources
+        rs.close();
+        ps.close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error retrieving total sales!");
+        e.printStackTrace();
+    }
+}
+
+   public void checkLowStock() {
+    // Database connection
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+
+    // SQL query to find products with low stock (less than 5 units)
+    String sql = "SELECT productName, stockQuantity FROM products WHERE stockQuantity < 5";
+
+    try {
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        StringBuilder lowStockMessage = new StringBuilder();
+        boolean hasLowStock = false;
+
+        // Iterate through low-stock products
+        while (rs.next()) {
+            hasLowStock = true;
+            String productName = rs.getString("productName");
+            int stockQuantity = rs.getInt("stockQuantity");
+            lowStockMessage.append(productName).append(" (").append(stockQuantity).append(" left)\n");
+        }
+
+        // Update the JLabel based on stock status
+        if (hasLowStock) {
+            lowStockLBL.setText("<html><b style='color:red;'>Low Stock:</b><br>" + lowStockMessage.toString().replace("\n", "<br>") + "</html>");
+        } else {
+            lowStockLBL.setText("All products are sufficiently stocked.");
+        }
+
+        // Close the resources
+        rs.close();
+        ps.close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error checking low stock products!");
+        e.printStackTrace();
+    }
+}
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1836,6 +1917,7 @@ private String getProductIDByName(String productName, Connection conn) throws SQ
     private java.awt.Label label1;
     private javax.swing.JLabel lnameLBL;
     private javax.swing.JTextField lnameTXT;
+    private javax.swing.JLabel lowStockLBL;
     private javax.swing.JLabel passwordLBL;
     private javax.swing.JTextField passwordTXT;
     private javax.swing.JLabel priceLBL;
@@ -1868,6 +1950,7 @@ private String getProductIDByName(String productName, Connection conn) throws SQ
     private com.toedter.calendar.JDateChooser startDateChooser;
     private javax.swing.JLabel stocksLBL;
     private javax.swing.JTextField stocksTXT;
+    private javax.swing.JLabel total_sale_product;
     private javax.swing.JTextField totalsalesTXT;
     private javax.swing.JButton updateproductBTN;
     private javax.swing.JButton updateuserBTN;

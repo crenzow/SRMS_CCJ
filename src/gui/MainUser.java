@@ -191,16 +191,16 @@ public class MainUser extends javax.swing.JFrame {
                 searchTXTActionPerformed(evt);
             }
         });
-        jPanel5.add(searchTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 250, 40));
+        jPanel5.add(searchTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, 260, 40));
 
         searchBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        searchBTN.setText("SEARCH");
+        searchBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
         searchBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBTNActionPerformed(evt);
             }
         });
-        jPanel5.add(searchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, 40));
+        jPanel5.add(searchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, -1, 40));
 
         productidLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         productidLBL.setText("Product ID:");
@@ -273,7 +273,7 @@ public class MainUser extends javax.swing.JFrame {
                 filterCMBBXActionPerformed(evt);
             }
         });
-        jPanel5.add(filterCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 190, 30));
+        jPanel5.add(filterCMBBX, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 190, 40));
 
         productstable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
