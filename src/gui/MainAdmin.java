@@ -3,9 +3,20 @@ package gui;
 import javax.swing.*;
 import java.sql.*;
 import dbConnection.DatabaseConnection;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class MainAdmin extends javax.swing.JFrame {
 
@@ -17,6 +28,7 @@ public class MainAdmin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         retrieveTotalSales();
         checkLowStock();
+        showSalesChart();
     }
 
     /**
@@ -1284,102 +1296,102 @@ public class MainAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteBTNActionPerformed
 
     private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
-    // Get input values from the text fields
-    String salesID = srsalesIDTXT.getText().trim();
-    String salespersonName = srsalespersonTXT.getText().trim();
-    String productName = srproductnameTXT.getText().trim();
-    String totalPrice = srsalesTXT.getText().trim();
-    String quantitySold = srquantityTXT.getText().trim();
-    String saleDate = srdateTXT.getText().trim();
+        // Get input values from the text fields
+        String salesID = srsalesIDTXT.getText().trim();
+        String salespersonName = srsalespersonTXT.getText().trim();
+        String productName = srproductnameTXT.getText().trim();
+        String totalPrice = srsalesTXT.getText().trim();
+        String quantitySold = srquantityTXT.getText().trim();
+        String saleDate = srdateTXT.getText().trim();
 
-    // Input validation
-    if (salesID.isEmpty() || salespersonName.isEmpty() || productName.isEmpty() ||
-        totalPrice.isEmpty() || quantitySold.isEmpty() || saleDate.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "All fields must be filled out!", "Warning", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-
-    // Establish database connection
-    Connection conn = DatabaseConnection.getInstance().getConnection();
-
-    try {
-        // SQL query to update the sales record in the database
-        String sql = "UPDATE sales SET userID = ?, productID = ?, totalPrice = ?, quantitySold = ?, saleDate = ? " +
-                     "WHERE salesID = ?";
-
-        // Get the userID and productID based on salesperson name and product name (you might need to adjust this logic)
-        String userID = getUserIDByName(salespersonName, conn);
-        String productID = getProductIDByName(productName, conn);
-
-        if (userID == null || productID == null) {
-            JOptionPane.showMessageDialog(null, "Invalid salesperson or product!", "Error", JOptionPane.ERROR_MESSAGE);
+        // Input validation
+        if (salesID.isEmpty() || salespersonName.isEmpty() || productName.isEmpty() ||
+            totalPrice.isEmpty() || quantitySold.isEmpty() || saleDate.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All fields must be filled out!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Prepare the statement and set the values
+        // Establish database connection
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+
+        try {
+            // SQL query to insert a new sales record
+            String sql = "INSERT INTO sales (salesID, userID, productID, totalPrice, quantitySold, saleDate) " +
+                         "VALUES (?, ?, ?, ?, ?, ?)";
+
+            // Get the userID and productID based on salesperson name and product name
+            String userID = getUserIDByName(salespersonName, conn);
+            String productID = getProductIDByName(productName, conn);
+
+            if (userID == null || productID == null) {
+                JOptionPane.showMessageDialog(null, "Invalid salesperson or product!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Prepare the statement and set the values
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, salesID);  // Unique sales ID
+            ps.setString(2, userID);  // Retrieved userID
+            ps.setString(3, productID);  // Retrieved productID
+            ps.setString(4, totalPrice);
+            ps.setString(5, quantitySold);
+            ps.setString(6, saleDate);
+
+            // Execute the insert (INSERT INTO)
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Sales Record Added Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to Add Sales Record.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            // Close the PreparedStatement
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error Adding Data!", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
+    // Helper function to get the userID by salesperson's name
+    private String getUserIDByName(String name, Connection conn) throws SQLException {
+        String userID = null;
+        String[] nameParts = name.split(" ");
+        String firstName = nameParts[0];
+        String lastName = nameParts.length > 1 ? nameParts[1] : "";
+
+        String sql = "SELECT userID FROM users WHERE firstName = ? AND lastName = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, userID);  // Assuming you retrieve the userID based on the salesperson's name
-        ps.setString(2, productID);  // Assuming you retrieve the productID based on the product's name
-        ps.setString(3, totalPrice);
-        ps.setString(4, quantitySold);
-        ps.setString(5, saleDate);
-        ps.setString(6, salesID);  // Set the salesID for identifying the record to update
+        ps.setString(1, firstName);
+        ps.setString(2, lastName);
 
-        // Execute the update (UPDATE)
-        int rowsAffected = ps.executeUpdate();
-
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Sales Record Updated Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to Update Sales Record. Sales ID not found.", "Error", JOptionPane.ERROR_MESSAGE);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            userID = rs.getString("userID");
         }
 
-        // Close the PreparedStatement
+        rs.close();
         ps.close();
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error Updating Data!", "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    }
-}
-
-// Helper function to get the userID by salesperson's name (You may need to adjust this based on your data)
-private String getUserIDByName(String name, Connection conn) throws SQLException {
-    String userID = null;
-    String[] nameParts = name.split(" ");
-    String firstName = nameParts[0];
-    String lastName = nameParts.length > 1 ? nameParts[1] : "";
-
-    String sql = "SELECT userID FROM users WHERE firstName = ? AND lastName = ?";
-    PreparedStatement ps = conn.prepareStatement(sql);
-    ps.setString(1, firstName);
-    ps.setString(2, lastName);
-
-    ResultSet rs = ps.executeQuery();
-    if (rs.next()) {
-        userID = rs.getString("userID");
+        return userID;
     }
 
-    rs.close();
-    ps.close();
-    return userID;
-}
+    // Helper function to get the productID by product name
+    private String getProductIDByName(String productName, Connection conn) throws SQLException {
+        String productID = null;
 
-// Helper function to get the productID by product name (You may need to adjust this based on your data)
-private String getProductIDByName(String productName, Connection conn) throws SQLException {
-    String productID = null;
+        String sql = "SELECT productID FROM products WHERE productName = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, productName);
 
-    String sql = "SELECT productID FROM products WHERE productName = ?";
-    PreparedStatement ps = conn.prepareStatement(sql);
-    ps.setString(1, productName);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            productID = rs.getString("productID");
+        }
 
-    ResultSet rs = ps.executeQuery();
-    if (rs.next()) {
-        productID = rs.getString("productID");
-    }
-
-    rs.close();
-    ps.close();
-    return productID;   
+        rs.close();
+        ps.close();
+        return productID;   
     }//GEN-LAST:event_addBTNActionPerformed
 
     private void srupdateBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srupdateBTNActionPerformed
@@ -1828,6 +1840,87 @@ private String getProductIDByName(String productName, Connection conn) throws SQ
         e.printStackTrace();
     }
 }
+   
+private void showSalesChart() {
+    // Create dataset for total quantity of products sold
+    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    
+    // Database connection and query
+    Connection conn = DatabaseConnection.getInstance().getConnection();
+    Map<String, Color> productColors = new HashMap<>(); // Store product-color mapping
+    int productCount = 0; // Track number of products
+
+    if (conn != null) {
+        String query = "SELECT p.productName, SUM(s.quantitySold) AS totalQuantity " +
+                       "FROM sales s " +
+                       "JOIN products p ON s.productID = p.productID " +
+                       "GROUP BY p.productName";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String productName = rs.getString("productName");
+                int totalQuantity = rs.getInt("totalQuantity");
+                dataset.addValue(totalQuantity, productName, "Quantity Sold");
+
+                // Generate a unique color based on product count
+                float hue = (float) productCount / 20; // Ensures evenly spaced colors
+                Color uniqueColor = Color.getHSBColor(hue, 0.8f, 0.9f);
+                productColors.put(productName, uniqueColor);
+                
+                productCount++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, 
+                "Error fetching sales data: " + e.getMessage(), 
+                "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Create the bar chart
+    JFreeChart chart = ChartFactory.createBarChart(
+            "Total Quantity Sold by Product",  // Chart title
+            "Product",                         // X-Axis Label
+            "Quantity Sold",                   // Y-Axis Label
+            dataset,                           // Dataset
+            PlotOrientation.VERTICAL,          // Orientation
+            true,                              // Enable legend
+            true,                              // Enable tooltips
+            false                              // Disable URLs
+    );
+
+    // Customize colors per product
+    CategoryPlot plot = chart.getCategoryPlot();
+    BarRenderer renderer = (BarRenderer) plot.getRenderer();
+
+    int index = 0;
+    for (Object obj : dataset.getRowKeys()) { // Get row keys (product names)
+        String product = obj.toString(); // Convert Object to String
+        if (productColors.containsKey(product)) {
+            renderer.setSeriesPaint(index, productColors.get(product));
+        }
+        index++;
+    }
+
+    // Create chart panel
+    ChartPanel chartPanel = new ChartPanel(chart);
+    chartPanel.setBounds(50, 100, 880, 440); // Set (x, y, width, height)
+
+    // Ensure jLabel10 allows adding components
+    jLabel10.setLayout(null);
+    jLabel10.add(chartPanel, BorderLayout.CENTER);
+
+    jLabel10.revalidate(); // Refresh panel
+    jLabel10.repaint();    // Redraw panel
+}
+
+
+ 
+
+   
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
