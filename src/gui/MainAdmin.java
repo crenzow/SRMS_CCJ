@@ -292,13 +292,13 @@ public class MainAdmin extends javax.swing.JFrame {
         });
         salesPanel.add(srsearchTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, 120, 40));
 
-        srsearchBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        srsearchBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search (1).png"))); // NOI18N
         srsearchBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 srsearchBTNActionPerformed(evt);
             }
         });
-        salesPanel.add(srsearchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, -1, 40));
+        salesPanel.add(srsearchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, 40, 40));
 
         srclearBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         srclearBTN.setText("CLEAR");
@@ -626,13 +626,13 @@ public class MainAdmin extends javax.swing.JFrame {
         jPanel1.add(deleteuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, 140, 40));
 
         searchuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        searchuserBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        searchuserBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search (1).png"))); // NOI18N
         searchuserBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchuserBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(searchuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, 40));
+        jPanel1.add(searchuserBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 40, 40));
         jPanel1.add(searchuserTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 120, 40));
 
         clearuserBTN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -1907,7 +1907,7 @@ private void showSalesChart() {
 
     // Create chart panel
     ChartPanel chartPanel = new ChartPanel(chart);
-    chartPanel.setBounds(50, 100, 880, 440); // Set (x, y, width, height)
+    chartPanel.setBounds(50, 135, 880, 440); // Set (x, y, width, height)
 
     // Ensure jLabel10 allows adding components
     jLabel10.setLayout(null);
