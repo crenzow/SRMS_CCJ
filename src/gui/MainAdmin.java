@@ -444,13 +444,13 @@ public class MainAdmin extends javax.swing.JFrame {
         warehousePanel.add(priceTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 280, 160, 40));
 
         searchBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        searchBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        searchBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search (1).png"))); // NOI18N
         searchBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBTNActionPerformed(evt);
             }
         });
-        warehousePanel.add(searchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, -1, 40));
+        warehousePanel.add(searchBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, 40, 40));
 
         productnameLBL.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         productnameLBL.setText("Product Name:");
